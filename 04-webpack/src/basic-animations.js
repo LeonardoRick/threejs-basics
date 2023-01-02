@@ -59,7 +59,7 @@ export function createCubeGroupScene() {
 }
 
 export function animateCubeWithTime() {
-    const [renderer, scene, camera, mesh] = getRedCubeSetup(canvasId);
+    const [renderer, scene, mesh, camera] = getRedCubeSetup(canvasId);
     let time = Date.now();
     const tick = () => {
         // 144hz is faster than 60hz, so we use time to balance that.
@@ -84,7 +84,7 @@ export function animateCubeWithTime() {
 }
 
 export function animateCubeWithClock() {
-    const [renderer, scene, camera, mesh] = getRedCubeSetup(canvasId);
+    const [renderer, scene, mesh, camera] = getRedCubeSetup(canvasId);
     const clock = new Clock();
     const tick = () => {
         const elapsedTime = clock.getElapsedTime();
@@ -92,16 +92,13 @@ export function animateCubeWithClock() {
         // overriting the rotation y with this value is enough to rotate
         // the square equally on all machines. If we want a full round of the
         // object per second, we use PI.
-        // mesh.rotation.y = elapsedTime * Math.PI * 2;
+        mesh.rotation.y = elapsedTime * Math.PI;
 
         // With sin and cos we can get nice fluid and round animations
-        // mesh.position.y = Math.sin(elapsedTime);
-        // mesh.position.x = Math.cos(elapsedTime);
-
-        // we can also make the camera move and look to the fixed object
-
         camera.position.y = Math.sin(elapsedTime);
         camera.position.x = Math.cos(elapsedTime);
+        // we can also make the camera move and look to the fixed object
+
         camera.lookAt(mesh.position);
 
         renderer.render(scene, camera);
@@ -111,11 +108,31 @@ export function animateCubeWithClock() {
 }
 
 export function animateWithGsap() {
-    const [renderer, scene, camera, mesh] = getRedCubeSetup(canvasId);
+    const [renderer, scene, mesh, camera] = getRedCubeSetup(canvasId);
     gsap.to(mesh.position, { x: 2, duration: 1, delay: 1 });
     const tick = () => {
         renderer.render(scene, camera);
         window.requestAnimationFrame(tick);
     };
     tick();
+}
+
+export function animateExternalMeshWithClock(mesh, renderer, scene, camera) {
+    const clock = new Clock();
+    const tick = () => {
+        const elapsedTime = clock.getElapsedTime();
+        mesh.rotation.y = (elapsedTime * Math.PI) / 2;
+        renderer.render(scene, camera);
+        window.requestAnimationFrame(tick);
+    };
+    tick();
+}
+
+export function loopAnimation(renderer, scene, camera, callback) {
+    const ttick = () => {
+        callback();
+        renderer.render(scene, camera);
+        window.requestAnimationFrame(ttick);
+    };
+    ttick();
 }

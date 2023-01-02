@@ -1,30 +1,96 @@
-import { PerspectiveCamera } from 'three';
+import { OrthographicCamera, PerspectiveCamera } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import {
+    animateExternalMeshWithClock,
+    loopAnimation,
+} from './basic-animations';
 import { getRedCubeSetup } from './utils';
 
 const canvasId = 'cameras-webgl';
 export function perspectiveCamera() {
-    const [renderer, scene, camera, mesh] = getRedCubeSetup(canvasId);
-    const pCamera = new PerspectiveCamera(75, 800 / 600);
+    const [renderer, scene, _, mesh] = getRedCubeSetup(canvasId);
+    // the last two values on PerspectiveCamera constructor is 'near' and 'far'. We can set the 'far' value properly to
+    // not renderer elements that are to far from the camera, for ex: mountains when we have a village. Once the
+    // mountain reaches the specified value, its not rendered anymore.
+    // To test it, change the last value to a value lower than pCamera.position.z and the cube will disapear
+    const pCamera = new PerspectiveCamera(75, 800 / 600, 0.1, 100);
     pCamera.position.z = 3;
-    let time = Date.now();
-    const tick = () => {
-        // 144hz is faster than 60hz, so we use time to balance that.
-        // the calculation and reexecution of 'tick' function is faster on a computer
-        // with 144hz,  what would cause this function to run more times than in a 60hz
-        // machine. but calculating a deltaTime (time before the function executes subtracted
-        // by the time when we reach the const currentTime... line) on each step, is also
-        // faster on a 144hz machine! so the deltaTime on a 144hz machine will be
-        // lower than the deltaTime on a 60hz. so runing 000.1 * 2 (144hz PC) on two
-        // interactions, will be the same as running 0.001 * 4 on one single interaction
-        // (60hz pc). This way, we balance the framerate with the time and keep the animation
-        // on the same speed on every machine.
-        const currentTime = Date.now();
-        const deltaTime = currentTime - time;
-        time = currentTime;
-        mesh.rotation.y += 0.001 * deltaTime;
-        // Render
-        renderer.render(scene, pCamera);
-        window.requestAnimationFrame(tick);
+    scene.add(pCamera);
+    renderer.render(scene, pCamera);
+    console.log(pCamera.position.length());
+}
+
+export function ortogarphicCamera() {
+    const [renderer, scene, mesh] = getRedCubeSetup(canvasId);
+    // far elements has the same perspective than close ones
+    const aspectRatio = 800 / 600;
+    const oCamera = new OrthographicCamera(
+        -1 * aspectRatio,
+        1 * aspectRatio,
+        1,
+        -1,
+        0.1,
+        100
+    );
+    oCamera.position.x = 2;
+    oCamera.position.y = 2;
+    oCamera.position.z = 3;
+    oCamera.lookAt(mesh.position);
+    renderer.render(scene, oCamera);
+    animateExternalMeshWithClock(mesh, renderer, scene, oCamera);
+}
+
+export function movePerspectiveCamerawithMouse() {
+    const sizes = {
+        width: 800,
+        height: 600,
     };
-    tick();
+    const cursor = {
+        x: 0,
+        y: 0,
+    };
+    const [renderer, scene, mesh, camera] = getRedCubeSetup(
+        canvasId,
+        sizes.width,
+        sizes.height
+    );
+    renderer.render(scene, camera);
+    // // get mouse position
+    window.addEventListener('mousemove', (event) => {
+        // dividing the value by the size of our viewport, we can have a more precise position related
+        // to the object. this way, when I resize my browser window, the value will be consistent
+        cursor.x = -(event.clientX / sizes.width - 0.5);
+        cursor.y = event.clientY / sizes.height - 0.5;
+        // console.log(cursor.x);
+        console.log(cursor.y);
+    });
+    loopAnimation(renderer, scene, camera, () => {
+        // we use math.sin and math.cos combined to get the horizontal rotation animation.
+        // we use Math.PI bacause we ant a full object rotation
+        // we multiply it by 3 just to put the camera a little bit far from the cube
+        camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 3;
+        camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 3;
+        camera.position.y = cursor.y * 5;
+        camera.lookAt(mesh.position);
+    });
+}
+
+export function orbitControls() {
+    console.log(OrbitControls);
+    const canvas = document.getElementById(canvasId);
+    const [renderer, scene, _mesh, camera] = getRedCubeSetup(canvasId);
+    const controls = new OrbitControls(camera, canvas);
+    // smooth delay when stoping animating
+    controls.enableDamping = true;
+    controls.update();
+    renderer.render(scene, camera);
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // required if controls.enableDamping or controls.autoRotate are set to true
+        controls.update();
+
+        renderer.render(scene, camera);
+    }
+    animate();
 }

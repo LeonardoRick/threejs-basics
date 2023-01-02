@@ -5,10 +5,18 @@ import {
     animateCubeWithClock,
     animateWithGsap,
 } from './basic-animations';
-import { perspectiveCamera } from './cameras';
+import {
+    perspectiveCamera,
+    ortogarphicCamera,
+    movePerspectiveCamerawithMouse,
+    orbitControls,
+} from './cameras';
 // createCubeGroupScene();
 // animateCubeWithTime();
 // animateCubeWithClock();
 // animateWithGsap();
 
-perspectiveCamera();
+// perspectiveCamera();
+// ortogarphicCamera();
+// movePerspectiveCamerawithMouse();
+orbitControls();
