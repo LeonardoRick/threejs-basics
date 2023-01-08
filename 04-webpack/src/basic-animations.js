@@ -128,11 +128,12 @@ export function animateExternalMeshWithClock(mesh, renderer, scene, camera) {
     tick();
 }
 
-export function loopAnimation(renderer, scene, camera, callback) {
-    const ttick = () => {
+// allow objects and camera to have its properties re-rendered on the screen when some value change.
+export function loopAnimation(renderer, scene, camera, callback = () => {}) {
+    const animate = () => {
         callback();
         renderer.render(scene, camera);
-        window.requestAnimationFrame(ttick);
+        window.requestAnimationFrame(animate);
     };
-    ttick();
+    animate();
 }

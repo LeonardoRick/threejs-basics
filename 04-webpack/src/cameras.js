@@ -83,11 +83,7 @@ export function applyOrbitControl(camera, canvas, renderer, scene) {
     const controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
     controls.update();
-    function animate() {
-        requestAnimationFrame(animate);
-        // required if controls.enableDamping or controls.autoRotate are set to true
-        controls.update();
-        renderer.render(scene, camera);
-    }
-    animate();
+    // controls.update is required inside animation frame
+    //if controls.enableDamping or controls.autoRotate are set to true
+    loopAnimation(renderer, scene, camera, () => controls.update());
 }

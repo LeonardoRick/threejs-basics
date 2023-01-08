@@ -12,8 +12,12 @@ import {
     orbitControlsExample,
 } from './cameras';
 import { createMessyObjectExample, createTriangleExample } from './geometries';
+import { debugGUIExample } from './debug';
+
 // show three cubes with different colors in a scene
 // createCubeGroupSceneExample();
+
+/* ANIMATIONS */
 
 // show a red cube rotating fixed on the axis Y
 // animateCubeWithTimeExample();
@@ -23,6 +27,8 @@ import { createMessyObjectExample, createTriangleExample } from './geometries';
 
 // show a red cube sliding to right
 // animateWithGsapExample();
+
+/* CAMERAS */
 
 // show a red rectangle in a static front visualization
 // perspectiveCameraExample();
@@ -37,8 +43,13 @@ import { createMessyObjectExample, createTriangleExample } from './geometries';
 // when we right click and move the mouse
 // orbitControlsExample();
 
+/* GEOMETRIES */
+
 // draw a simple triangle with 3 axes (custom object)
 // createTriangleExample();
 
 // draw random triangles inside a space range creating a messy format
-createMessyObjectExample();
+// createMessyObjectExample();
+
+/* lil-GUI */
+// debugGUIExample();

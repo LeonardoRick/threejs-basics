@@ -16,16 +16,14 @@ export function getRedCubeSetup(
 ) {
     const [canvas, renderer, scene] = getCanvasRendererScene(canvasId);
     const camera = new PerspectiveCamera(75, width / height);
-    const mesh = new Mesh(
-        new BoxGeometry(1, 1, 1),
-        new MeshBasicMaterial({ color: 0xff0000 })
-    );
+    const material = new MeshBasicMaterial({ color: 0xff0000 });
+    const mesh = new Mesh(new BoxGeometry(1, 1, 1), material);
 
     resize && setResizeListener(camera, renderer);
     allowFullScreen && setFullScreenListener(canvas);
     setupDefaultCameraAndScene(camera, scene, mesh);
     updateRenderer(renderer, width, height);
-    return [renderer, scene, mesh, camera];
+    return [renderer, scene, mesh, camera, material];
 }
 
 export function getCanvasRendererScene(canvasId) {
@@ -59,7 +57,6 @@ export function setFullScreenListener(canvas) {
 }
 
 export function updateRenderer(renderer, width, height) {
-    console.log('updaterenderer');
     renderer.setSize(width, height);
     // some devices can have a pixelRatio of 5 and this costs too mutch to render because this means that each
     // pixel should process 5 virtual pixels inside of it. Since the human eye can't detect much information above
