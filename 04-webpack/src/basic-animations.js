@@ -4,8 +4,8 @@ import gsap from 'gsap';
 import { BoxGeometry, Clock, Group, Mesh, MeshBasicMaterial } from 'three';
 import { getRedCubeSetup } from './utils';
 
-const canvasId = 'basic-animations-webgl';
-export function createCubeGroupScene() {
+const canvasId = 'default-webgl';
+export function createCubeGroupSceneExample() {
     // scene
     const scene = new THREE.Scene();
 
@@ -58,7 +58,7 @@ export function createCubeGroupScene() {
     renderer.render(scene, camera);
 }
 
-export function animateCubeWithTime() {
+export function animateCubeWithTimeExample() {
     const [renderer, scene, mesh, camera] = getRedCubeSetup(canvasId);
     let time = Date.now();
     const tick = () => {
@@ -83,7 +83,7 @@ export function animateCubeWithTime() {
     tick();
 }
 
-export function animateCubeWithClock() {
+export function animateCubeWithClockExample() {
     const [renderer, scene, mesh, camera] = getRedCubeSetup(canvasId);
     const clock = new Clock();
     const tick = () => {
@@ -107,7 +107,7 @@ export function animateCubeWithClock() {
     tick();
 }
 
-export function animateWithGsap() {
+export function animateWithGsapExample() {
     const [renderer, scene, mesh, camera] = getRedCubeSetup(canvasId);
     gsap.to(mesh.position, { x: 2, duration: 1, delay: 1 });
     const tick = () => {

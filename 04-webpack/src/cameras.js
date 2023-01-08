@@ -6,9 +6,9 @@ import {
 } from './basic-animations';
 import { getRedCubeSetup } from './utils';
 
-const canvasId = 'cameras-webgl';
-export function perspectiveCamera() {
-    const [renderer, scene, _, mesh] = getRedCubeSetup(canvasId);
+const canvasId = 'default-webgl';
+export function perspectiveCameraExample() {
+    const [renderer, scene, mesh, _] = getRedCubeSetup(canvasId);
     // the last two values on PerspectiveCamera constructor is 'near' and 'far'. We can set the 'far' value properly to
     // not renderer elements that are to far from the camera, for ex: mountains when we have a village. Once the
     // mountain reaches the specified value, its not rendered anymore.
@@ -17,10 +17,9 @@ export function perspectiveCamera() {
     pCamera.position.z = 3;
     scene.add(pCamera);
     renderer.render(scene, pCamera);
-    console.log(pCamera.position.length());
 }
 
-export function ortogarphicCamera() {
+export function ortogarphicCameraExample() {
     const [renderer, scene, mesh] = getRedCubeSetup(canvasId);
     // far elements has the same perspective than close ones
     const aspectRatio = 800 / 600;
@@ -40,10 +39,10 @@ export function ortogarphicCamera() {
     animateExternalMeshWithClock(mesh, renderer, scene, oCamera);
 }
 
-export function movePerspectiveCamerawithMouse() {
+export function movePerspectiveCameraWithMouseExample() {
     const sizes = {
-        width: 800,
-        height: 600,
+        width: window.innerWidth,
+        height: window.innerHeight,
     };
     const cursor = {
         x: 0,
@@ -52,7 +51,8 @@ export function movePerspectiveCamerawithMouse() {
     const [renderer, scene, mesh, camera] = getRedCubeSetup(
         canvasId,
         sizes.width,
-        sizes.height
+        sizes.height,
+        false
     );
     renderer.render(scene, camera);
     // // get mouse position
@@ -61,8 +61,6 @@ export function movePerspectiveCamerawithMouse() {
         // to the object. this way, when I resize my browser window, the value will be consistent
         cursor.x = -(event.clientX / sizes.width - 0.5);
         cursor.y = event.clientY / sizes.height - 0.5;
-        // console.log(cursor.x);
-        console.log(cursor.y);
     });
     loopAnimation(renderer, scene, camera, () => {
         // we use math.sin and math.cos combined to get the horizontal rotation animation.
@@ -75,21 +73,20 @@ export function movePerspectiveCamerawithMouse() {
     });
 }
 
-export function orbitControls() {
-    console.log(OrbitControls);
-    const canvas = document.getElementById(canvasId);
+export function orbitControlsExample() {
     const [renderer, scene, _mesh, camera] = getRedCubeSetup(canvasId);
+    const canvas = document.getElementById(canvasId);
+    applyOrbitControl(camera, canvas, renderer, scene);
+}
+
+export function applyOrbitControl(camera, canvas, renderer, scene) {
     const controls = new OrbitControls(camera, canvas);
-    // smooth delay when stoping animating
     controls.enableDamping = true;
     controls.update();
-    renderer.render(scene, camera);
     function animate() {
         requestAnimationFrame(animate);
-
         // required if controls.enableDamping or controls.autoRotate are set to true
         controls.update();
-
         renderer.render(scene, camera);
     }
     animate();
