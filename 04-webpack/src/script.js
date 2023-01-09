@@ -12,7 +12,8 @@ import {
     orbitControlsExample,
 } from './cameras';
 import { createMessyObjectExample, createTriangleExample } from './geometries';
-import { debugGUIExample } from './debug';
+import { debugGUIExample, setGUI } from './debug';
+import { getCustomTexture } from './textures';
 
 // show three cubes with different colors in a scene
 // createCubeGroupSceneExample();
@@ -52,4 +53,8 @@ import { debugGUIExample } from './debug';
 // createMessyObjectExample();
 
 /* lil-GUI */
+// setGUI(); // call this for controls to appear;
 // debugGUIExample();
+
+/* TEXTURES */
+getCustomTexture();

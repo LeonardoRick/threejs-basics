@@ -4,19 +4,25 @@ import {
     animateExternalMeshWithClock,
     loopAnimation,
 } from './basic-animations';
-import { getRedCubeSetup } from './utils';
+import { getRedCubeSetup, setResizeListener } from './utils';
 
 const canvasId = 'default-webgl';
 export function perspectiveCameraExample() {
-    const [renderer, scene, mesh, _] = getRedCubeSetup(canvasId);
+    const [renderer, scene] = getRedCubeSetup(canvasId);
     // the last two values on PerspectiveCamera constructor is 'near' and 'far'. We can set the 'far' value properly to
     // not renderer elements that are to far from the camera, for ex: mountains when we have a village. Once the
     // mountain reaches the specified value, its not rendered anymore.
     // To test it, change the last value to a value lower than pCamera.position.z and the cube will disapear
-    const pCamera = new PerspectiveCamera(75, 800 / 600, 0.1, 100);
+
+    const pCamera = new PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        100
+    );
     pCamera.position.z = 3;
-    scene.add(pCamera);
-    renderer.render(scene, pCamera);
+    setResizeListener(pCamera, renderer);
+    loopAnimation(renderer, scene, pCamera);
 }
 
 export function ortogarphicCameraExample() {

@@ -15,8 +15,12 @@ import gsap from 'gsap';
 // The tweaks are basic possible to be applied on any object with a property. [gui.add(obj, 'prop')]
 // The ideia is that the debug will allow you to change this variables on your browser on the fly
 
-const gui = new GUI({ width: 400 });
+let gui;
 const canvasId = 'default-webgl';
+
+export function setGUI() {
+    gui = new GUI({ width: 400 });
+}
 
 export function getGUI() {
     return gui;

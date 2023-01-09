@@ -129,6 +129,9 @@ export function animateExternalMeshWithClock(mesh, renderer, scene, camera) {
 }
 
 // allow objects and camera to have its properties re-rendered on the screen when some value change.
+
+// this should be called everywhere because for screen resizing to do not distort our object,
+// it need to rerender the scene
 export function loopAnimation(renderer, scene, camera, callback = () => {}) {
     const animate = () => {
         callback();

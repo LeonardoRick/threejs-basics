@@ -41,7 +41,6 @@ export function setResizeListener(camera, renderer) {
         camera.updateProjectionMatrix();
 
         // Update renderer
-
         updateRenderer(renderer, window.innerWidth, window.innerHeight);
     });
 }
@@ -68,5 +67,5 @@ export function setupDefaultCameraAndScene(camera, scene, mesh, zPosition = 3) {
     camera.position.z = zPosition;
     camera.lookAt(mesh.position);
     scene.add(mesh);
-    scene.add(camera);
+    scene.add(camera); // https://github.com/mrdoob/three.js/issues/1046
 }
