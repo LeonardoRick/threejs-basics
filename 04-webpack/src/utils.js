@@ -14,7 +14,7 @@ export function getCubeSetup(
     });
     const mesh = new Mesh(new BoxGeometry(1, 1, 1), material);
 
-    const camera = setupDefaultCameraAndScene(scene, mesh, renderer, width, height, resize);
+    const camera = setupDefaultCameraAndScene(scene, renderer, mesh, width, height, resize);
     return [renderer, scene, mesh, camera, material];
 }
 
@@ -64,19 +64,20 @@ export function updateRendererSizeRatio(renderer, width, height) {
 
 export function setupDefaultCameraAndScene(
     scene,
-    mesh,
     renderer,
+    mesh = null,
     width = window.innerWidth,
     height = window.innerHeight,
     resize = true,
-    zPosition = 3,
     camera = null
 ) {
     const _camera = camera || new PerspectiveCamera(75, width / height);
-    _camera.position.z = zPosition;
-    _camera.lookAt(mesh.position);
-    scene.add(mesh);
+    _camera.position.z = 3;
+    if (mesh) {
+        _camera.lookAt(mesh.position);
+        scene.add(mesh);
+    }
     scene.add(_camera); // https://github.com/mrdoob/three.js/issues/1046
-    resize && setResizeListener(camera, renderer);
+    resize && setResizeListener(_camera, renderer);
     return _camera;
 }

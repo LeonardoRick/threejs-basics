@@ -19,7 +19,9 @@ let gui;
 const canvasId = 'default-webgl';
 
 export function setGUI() {
-    gui = new GUI({ width: 400 });
+    if (!gui) {
+        gui = new GUI({ width: 400 });
+    }
 }
 
 export function getGUI() {

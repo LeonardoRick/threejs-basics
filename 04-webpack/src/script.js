@@ -20,7 +20,16 @@ import {
     getRotationExample,
     getNearestFilterExample,
 } from './textures';
-import { multipleMaterialsExample } from './materials';
+import {
+    basicMaterialExample,
+    environmentMapExample,
+    lamberMaterialExample,
+    matcapMaterialExample,
+    normalMaterialExample,
+    phongMaterialExample,
+    standardMaterialExample,
+    toonMaterialExample,
+} from './materials';
 
 // show three cubes with different colors in a scene
 // createCubeGroupSceneExample();
@@ -72,4 +81,18 @@ import { multipleMaterialsExample } from './materials';
 
 /* MATERIALS */
 
-multipleMaterialsExample();
+// basicMaterialExample();
+// normalMaterialExample();
+
+// send numbers from 1-8 to change the matcap in reference
+// matcapMaterialExample(2);
+
+// lamberMaterialExample();
+// phongMaterialExample();
+// toonMaterialExample();
+
+// pay attention to the huge details that we can see on the door in the middle
+// standardMaterialExample();
+
+// pay attention to the environment that is being reflected by the objects
+environmentMapExample();

@@ -23,7 +23,7 @@ const canvas = document.getElementById(canvasId);
 // we can create the texture before and then notify that the texture needs to be updated
 export function getCustomTextureExample() {
     const image = new Image();
-    image.src = '/textures/door.jpg';
+    image.src = '/textures/door/color.jpg';
     const texture = new Texture(image);
     image.onload = () => (texture.needsUpdate = true);
     setCubeOnTheScreen(texture);
@@ -37,7 +37,7 @@ export function getTextureLoaderExample() {
     loadingManager.onError = () => console.log('onError');
     const textureLoader = new TextureLoader(loadingManager);
     const texture = textureLoader.load(
-        '/textures/door.jpg',
+        '/textures/color.jpg',
         //load
         () => console.log('textureLoader - load'),
         // progress (not commonly used)
@@ -50,7 +50,7 @@ export function getTextureLoaderExample() {
 
 export function getRepeatExample() {
     const textureLoader = new TextureLoader();
-    const texture = textureLoader.load('/textures/door.jpg');
+    const texture = textureLoader.load('/textures/door/color.jpg');
     texture.repeat.x = 2;
     texture.repeat.y = 3;
     texture.wrapS = RepeatWrapping;
@@ -60,7 +60,7 @@ export function getRepeatExample() {
 
 export function getRotationExample() {
     const textureLoader = new TextureLoader();
-    const texture = textureLoader.load('/textures/door.jpg');
+    const texture = textureLoader.load('/textures/door/color.jpg');
     // texture.rotation = Math.PI * 0.25;
     // we're changing the center of the drawing from the left bottom vertex to the center of the cube face.
     // we're using 0.5 because our cube has a x = 1 and a y = 1
@@ -75,7 +75,7 @@ export function getNearestFilterExample() {
     const path2 = '/textures/checkerboard-8x8.png';
     const texture = new TextureLoader().load(path2);
     setCubeOnTheScreen(texture);
-    // default is LinearFilter and add some strech and blury corners on the texture when needed.
+    // default is LinearFilter and add some strech and blury corners on the texture when needed. (generateMipmaps)
     // NearestFilter tries to enrich details of the texture and draw it sharp. Toggle the feature
     //  to see the difference between this two.
 
