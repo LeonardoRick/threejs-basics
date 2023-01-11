@@ -1,10 +1,4 @@
-import {
-    LoadingManager,
-    NearestFilter,
-    RepeatWrapping,
-    Texture,
-    TextureLoader,
-} from 'three';
+import { LoadingManager, NearestFilter, RepeatWrapping, Texture, TextureLoader } from 'three';
 import { applyOrbitControl } from './cameras';
 import { getCubeSetup } from './utils';
 

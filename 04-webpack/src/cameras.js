@@ -1,9 +1,6 @@
 import { OrthographicCamera, PerspectiveCamera } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import {
-    animateExternalMeshWithClock,
-    loopAnimation,
-} from './basic-animations';
+import { animateExternalMeshWithClock, loopAnimation } from './basic-animations';
 import { getCubeSetup, setResizeListener } from './utils';
 
 const canvasId = 'default-webgl';
@@ -14,12 +11,7 @@ export function perspectiveCameraExample() {
     // mountain reaches the specified value, its not rendered anymore.
     // To test it, change the last value to a value lower than pCamera.position.z and the cube will disapear
 
-    const pCamera = new PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        100
-    );
+    const pCamera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
     pCamera.position.z = 3;
     setResizeListener(pCamera, renderer);
     loopAnimation(renderer, scene, pCamera);
@@ -29,14 +21,7 @@ export function ortogarphicCameraExample() {
     const [renderer, scene, mesh] = getCubeSetup(canvasId);
     // far elements has the same perspective than close ones
     const aspectRatio = 800 / 600;
-    const oCamera = new OrthographicCamera(
-        -1 * aspectRatio,
-        1 * aspectRatio,
-        1,
-        -1,
-        0.1,
-        100
-    );
+    const oCamera = new OrthographicCamera(-1 * aspectRatio, 1 * aspectRatio, 1, -1, 0.1, 100);
     oCamera.position.x = 2;
     oCamera.position.y = 2;
     oCamera.position.z = 3;
@@ -54,12 +39,7 @@ export function movePerspectiveCameraWithMouseExample() {
         x: 0,
         y: 0,
     };
-    const [renderer, scene, mesh, camera] = getCubeSetup(
-        canvasId,
-        sizes.width,
-        sizes.height,
-        false
-    );
+    const [renderer, scene, mesh, camera] = getCubeSetup(canvasId, sizes.width, sizes.height, false);
     renderer.render(scene, camera);
     // // get mouse position
     window.addEventListener('mousemove', (event) => {

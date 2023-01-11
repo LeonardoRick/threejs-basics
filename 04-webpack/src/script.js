@@ -20,6 +20,7 @@ import {
     getRotationExample,
     getNearestFilterExample,
 } from './textures';
+import { multipleMaterialsExample } from './materials';
 
 // show three cubes with different colors in a scene
 // createCubeGroupSceneExample();
@@ -67,4 +68,8 @@ import {
 // getTextureLoaderExample();
 // getRepeatExample();
 // getRotationExample();
-getNearestFilterExample();
+// getNearestFilterExample();
+
+/* MATERIALS */
+
+multipleMaterialsExample();

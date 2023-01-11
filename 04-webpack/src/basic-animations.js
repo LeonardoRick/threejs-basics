@@ -11,21 +11,12 @@ export function createCubeGroupSceneExample() {
 
     // group
     const group = new Group();
-    const cube1 = new Mesh(
-        new BoxGeometry(1, 1, 1),
-        new MeshBasicMaterial({ color: 0xff0000 })
-    );
+    const cube1 = new Mesh(new BoxGeometry(1, 1, 1), new MeshBasicMaterial({ color: 0xff0000 }));
     cube1.position.x = -1.5;
 
-    const cube2 = new Mesh(
-        new BoxGeometry(1, 1, 1),
-        new MeshBasicMaterial({ color: 0x00ff00 })
-    );
+    const cube2 = new Mesh(new BoxGeometry(1, 1, 1), new MeshBasicMaterial({ color: 0x00ff00 }));
 
-    const cube3 = new Mesh(
-        new BoxGeometry(1, 1, 1),
-        new MeshBasicMaterial({ color: 0x0000ff })
-    );
+    const cube3 = new Mesh(new BoxGeometry(1, 1, 1), new MeshBasicMaterial({ color: 0x0000ff }));
     cube3.position.x = 1.5;
 
     group.add(cube1);
@@ -33,8 +24,8 @@ export function createCubeGroupSceneExample() {
     group.add(cube3);
     scene.add(group);
     const sizes = {
-        width: 800,
-        height: 600,
+        width: window.innerWidth,
+        height: window.innerHeight,
     };
     // Camera
     const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);

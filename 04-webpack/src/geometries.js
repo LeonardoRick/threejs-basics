@@ -1,40 +1,18 @@
-import {
-    BufferAttribute,
-    BufferGeometry,
-    Mesh,
-    MeshBasicMaterial,
-    PerspectiveCamera,
-} from 'three';
+import { BufferAttribute, BufferGeometry, Mesh, MeshBasicMaterial, PerspectiveCamera } from 'three';
 import { applyOrbitControl } from './cameras';
-import {
-    getCanvasRendererScene,
-    setFullScreenListener,
-    setResizeListener,
-    setupDefaultCameraAndScene,
-    updateRenderer,
-} from './utils';
+import { getRendererSceneCanvas, setResizeListener, setupDefaultCameraAndScene } from './utils';
 
 const canvasId = 'default-webgl';
 
 export function createTriangleExample() {
     const [renderer, scene, _mesh, camera] = createCustomGeometry(canvasId);
-    applyOrbitControl(
-        camera,
-        document.getElementById(canvasId),
-        renderer,
-        scene
-    );
+    applyOrbitControl(camera, document.getElementById(canvasId), renderer, scene);
     renderer.render(scene, camera);
 }
 
 export function createMessyObjectExample() {
     const [renderer, scene, _mesh, camera] = createRandomObject(canvasId);
-    applyOrbitControl(
-        camera,
-        document.getElementById(canvasId),
-        renderer,
-        scene
-    );
+    applyOrbitControl(camera, document.getElementById(canvasId), renderer, scene);
     renderer.render(scene, camera);
 }
 
@@ -45,16 +23,12 @@ function createCustomGeometry(
     resize = true,
     allowFullScreen = true
 ) {
-    const [canvas, renderer, scene] = getCanvasRendererScene(canvasId);
-    const camera = new PerspectiveCamera(75, width / height);
+    const [renderer, scene] = getRendererSceneCanvas(canvasId, width, height, allowFullScreen);
 
     // each 3 indexes are a vertex (x, y z)
     const positionsArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0]);
     const mesh = getCustomMesh(positionsArray);
-    resize && setResizeListener(camera, renderer);
-    allowFullScreen && setFullScreenListener(canvas);
-    setupDefaultCameraAndScene(camera, scene, mesh);
-    updateRenderer(renderer, width, height);
+    const camera = setupDefaultCameraAndScene(scene, mesh, renderer, width, height, resize);
 
     return [renderer, scene, mesh, camera];
 }
@@ -66,8 +40,7 @@ function createRandomObject(
     resize = true,
     allowFullScreen = true
 ) {
-    const [canvas, renderer, scene] = getCanvasRendererScene(canvasId);
-    const camera = new PerspectiveCamera(75, width / height);
+    const [renderer, scene] = getRendererSceneCanvas(canvasId, width, height, allowFullScreen);
 
     const count = 100;
     // each 3 indexes are a vertex (x, y z)
@@ -76,10 +49,7 @@ function createRandomObject(
         positionsArray[i] = (Math.random() - 0.5) * count;
     }
     const mesh = getCustomMesh(positionsArray);
-    resize && setResizeListener(camera, renderer);
-    allowFullScreen && setFullScreenListener(canvas);
-    setupDefaultCameraAndScene(camera, scene, mesh, 140);
-    updateRenderer(renderer, width, height);
+    const camera = setupDefaultCameraAndScene(scene, mesh, renderer, width, height, resize, 140);
 
     return [renderer, scene, mesh, camera];
 }
@@ -90,8 +60,5 @@ export function getCustomMesh(positionsArray) {
     const geometry = new BufferGeometry();
     geometry.setAttribute('position', positionsAttribute);
 
-    return new Mesh(
-        geometry,
-        new MeshBasicMaterial({ color: 0xff0000, wireframe: true })
-    );
+    return new Mesh(geometry, new MeshBasicMaterial({ color: 0xff0000, wireframe: true }));
 }

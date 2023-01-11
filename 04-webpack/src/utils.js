@@ -1,11 +1,4 @@
-import {
-    PerspectiveCamera,
-    Scene,
-    WebGLRenderer,
-    Mesh,
-    BoxGeometry,
-    MeshBasicMaterial,
-} from 'three';
+import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial } from 'three';
 
 export function getCubeSetup(
     canvasId,
@@ -15,25 +8,28 @@ export function getCubeSetup(
     allowFullScreen = true,
     texture = null
 ) {
-    const [canvas, renderer, scene] = getCanvasRendererScene(canvasId);
-    const camera = new PerspectiveCamera(75, width / height);
+    const [renderer, scene] = getRendererSceneCanvas(canvasId, width, height, allowFullScreen);
     const material = new MeshBasicMaterial({
         ...(texture ? { map: texture } : { color: 0xff0000 }),
     });
     const mesh = new Mesh(new BoxGeometry(1, 1, 1), material);
 
-    resize && setResizeListener(camera, renderer);
-    allowFullScreen && setFullScreenListener(canvas);
-    setupDefaultCameraAndScene(camera, scene, mesh);
-    updateRenderer(renderer, width, height);
+    const camera = setupDefaultCameraAndScene(scene, mesh, renderer, width, height, resize);
     return [renderer, scene, mesh, camera, material];
 }
 
-export function getCanvasRendererScene(canvasId) {
+export function getRendererSceneCanvas(
+    canvasId,
+    width = window.innerWidth,
+    height = window.innerHeight,
+    allowFullScreen = true
+) {
     const canvas = document.getElementById(canvasId);
     const renderer = new WebGLRenderer({ canvas });
     const scene = new Scene();
-    return [canvas, renderer, scene];
+    updateRendererSizeRatio(renderer, width, height);
+    allowFullScreen && setFullScreenListener(canvas);
+    return [renderer, scene, canvas];
 }
 
 export function setResizeListener(camera, renderer) {
@@ -44,7 +40,7 @@ export function setResizeListener(camera, renderer) {
         camera.updateProjectionMatrix();
 
         // Update renderer
-        updateRenderer(renderer, window.innerWidth, window.innerHeight);
+        updateRendererSizeRatio(renderer, window.innerWidth, window.innerHeight);
     });
 }
 
@@ -58,7 +54,7 @@ export function setFullScreenListener(canvas) {
     });
 }
 
-export function updateRenderer(renderer, width, height) {
+export function updateRendererSizeRatio(renderer, width, height) {
     renderer.setSize(width, height);
     // some devices can have a pixelRatio of 5 and this costs too mutch to render because this means that each
     // pixel should process 5 virtual pixels inside of it. Since the human eye can't detect much information above
@@ -66,9 +62,21 @@ export function updateRenderer(renderer, width, height) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 }
 
-export function setupDefaultCameraAndScene(camera, scene, mesh, zPosition = 3) {
-    camera.position.z = zPosition;
-    camera.lookAt(mesh.position);
+export function setupDefaultCameraAndScene(
+    scene,
+    mesh,
+    renderer,
+    width = window.innerWidth,
+    height = window.innerHeight,
+    resize = true,
+    zPosition = 3,
+    camera = null
+) {
+    const _camera = camera || new PerspectiveCamera(75, width / height);
+    _camera.position.z = zPosition;
+    _camera.lookAt(mesh.position);
     scene.add(mesh);
-    scene.add(camera); // https://github.com/mrdoob/three.js/issues/1046
+    scene.add(_camera); // https://github.com/mrdoob/three.js/issues/1046
+    resize && setResizeListener(camera, renderer);
+    return _camera;
 }
