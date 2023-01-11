@@ -12,11 +12,14 @@ export function getRedCubeSetup(
     width = window.innerWidth,
     height = window.innerHeight,
     resize = true,
-    allowFullScreen = true
+    allowFullScreen = true,
+    texture = null
 ) {
     const [canvas, renderer, scene] = getCanvasRendererScene(canvasId);
     const camera = new PerspectiveCamera(75, width / height);
-    const material = new MeshBasicMaterial({ color: 0xff0000 });
+    const material = new MeshBasicMaterial({
+        ...(texture ? { map: texture } : { color: 0xff0000 }),
+    });
     const mesh = new Mesh(new BoxGeometry(1, 1, 1), material);
 
     resize && setResizeListener(camera, renderer);

@@ -13,7 +13,13 @@ import {
 } from './cameras';
 import { createMessyObjectExample, createTriangleExample } from './geometries';
 import { debugGUIExample, setGUI } from './debug';
-import { getCustomTexture } from './textures';
+import {
+    getRepeatExample,
+    getCustomTextureExample,
+    getTextureLoaderExample,
+    getRotationExample,
+    getNearestFilterExample,
+} from './textures';
 
 // show three cubes with different colors in a scene
 // createCubeGroupSceneExample();
@@ -57,4 +63,8 @@ import { getCustomTexture } from './textures';
 // debugGUIExample();
 
 /* TEXTURES */
-getCustomTexture();
+// getCustomTextureExample();
+// getTextureLoaderExample();
+// getRepeatExample();
+// getRotationExample();
+getNearestFilterExample();
