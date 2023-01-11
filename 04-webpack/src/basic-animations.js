@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import gsap from 'gsap';
 
 import { BoxGeometry, Clock, Group, Mesh, MeshBasicMaterial } from 'three';
-import { getRedCubeSetup } from './utils';
+import { getCubeSetup } from './utils';
 
 const canvasId = 'default-webgl';
 export function createCubeGroupSceneExample() {
@@ -59,7 +59,7 @@ export function createCubeGroupSceneExample() {
 }
 
 export function animateCubeWithTimeExample() {
-    const [renderer, scene, mesh, camera] = getRedCubeSetup(canvasId);
+    const [renderer, scene, mesh, camera] = getCubeSetup(canvasId);
     let time = Date.now();
     const tick = () => {
         // 144hz is faster than 60hz, so we use time to balance that.
@@ -84,7 +84,7 @@ export function animateCubeWithTimeExample() {
 }
 
 export function animateCubeWithClockExample() {
-    const [renderer, scene, mesh, camera] = getRedCubeSetup(canvasId);
+    const [renderer, scene, mesh, camera] = getCubeSetup(canvasId);
     const clock = new Clock();
     const tick = () => {
         const elapsedTime = clock.getElapsedTime();
@@ -108,7 +108,7 @@ export function animateCubeWithClockExample() {
 }
 
 export function animateWithGsapExample() {
-    const [renderer, scene, mesh, camera] = getRedCubeSetup(canvasId);
+    const [renderer, scene, mesh, camera] = getCubeSetup(canvasId);
     gsap.to(mesh.position, { x: 2, duration: 1, delay: 1 });
     const tick = () => {
         renderer.render(scene, camera);

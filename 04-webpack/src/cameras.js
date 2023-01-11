@@ -4,11 +4,11 @@ import {
     animateExternalMeshWithClock,
     loopAnimation,
 } from './basic-animations';
-import { getRedCubeSetup, setResizeListener } from './utils';
+import { getCubeSetup, setResizeListener } from './utils';
 
 const canvasId = 'default-webgl';
 export function perspectiveCameraExample() {
-    const [renderer, scene] = getRedCubeSetup(canvasId);
+    const [renderer, scene] = getCubeSetup(canvasId);
     // the last two values on PerspectiveCamera constructor is 'near' and 'far'. We can set the 'far' value properly to
     // not renderer elements that are to far from the camera, for ex: mountains when we have a village. Once the
     // mountain reaches the specified value, its not rendered anymore.
@@ -26,7 +26,7 @@ export function perspectiveCameraExample() {
 }
 
 export function ortogarphicCameraExample() {
-    const [renderer, scene, mesh] = getRedCubeSetup(canvasId);
+    const [renderer, scene, mesh] = getCubeSetup(canvasId);
     // far elements has the same perspective than close ones
     const aspectRatio = 800 / 600;
     const oCamera = new OrthographicCamera(
@@ -54,7 +54,7 @@ export function movePerspectiveCameraWithMouseExample() {
         x: 0,
         y: 0,
     };
-    const [renderer, scene, mesh, camera] = getRedCubeSetup(
+    const [renderer, scene, mesh, camera] = getCubeSetup(
         canvasId,
         sizes.width,
         sizes.height,
@@ -80,7 +80,7 @@ export function movePerspectiveCameraWithMouseExample() {
 }
 
 export function orbitControlsExample() {
-    const [renderer, scene, _mesh, camera] = getRedCubeSetup(canvasId);
+    const [renderer, scene, _mesh, camera] = getCubeSetup(canvasId);
     const canvas = document.getElementById(canvasId);
     applyOrbitControl(camera, canvas, renderer, scene);
 }

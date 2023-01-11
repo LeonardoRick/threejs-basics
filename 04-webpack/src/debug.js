@@ -1,6 +1,6 @@
 import GUI from 'lil-gui';
 import { applyOrbitControl } from './cameras';
-import { getRedCubeSetup } from './utils';
+import { getCubeSetup } from './utils';
 import gsap from 'gsap';
 // There are different types of elements you can add to that panel:
 
@@ -27,7 +27,7 @@ export function getGUI() {
 }
 
 export function debugGUIExample() {
-    const [renderer, scene, mesh, camera, material] = getRedCubeSetup(canvasId);
+    const [renderer, scene, mesh, camera, material] = getCubeSetup(canvasId);
     applyOrbitControl(
         camera,
         document.getElementById(canvasId),

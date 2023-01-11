@@ -7,7 +7,7 @@ import {
     MeshBasicMaterial,
 } from 'three';
 
-export function getRedCubeSetup(
+export function getCubeSetup(
     canvasId,
     width = window.innerWidth,
     height = window.innerHeight,

@@ -6,7 +6,7 @@ import {
     TextureLoader,
 } from 'three';
 import { applyOrbitControl } from './cameras';
-import { getRedCubeSetup } from './utils';
+import { getCubeSetup } from './utils';
 
 // Texture notes:
 
@@ -103,7 +103,7 @@ export function getNearestFilterExample() {
 // this is not related to textures and repeats in all funtions. To understand better
 // this part navigate through to utils.js and geometries.js and other files
 function setCubeOnTheScreen(texture) {
-    const [renderer, scene, mesh, camera] = getRedCubeSetup(
+    const [renderer, scene, mesh, camera] = getCubeSetup(
         canvasId,
         window.innerWidth,
         window.innerHeight,
