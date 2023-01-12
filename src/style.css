@@ -2,6 +2,14 @@ body,
 html {
     margin: 0;
     overflow: hidden;
+    background-color: darkslategray;
+    color: white;
+}
+p {
+    margin: 0;
+}
+a {
+    color: white;
 }
 
 #default-webgl {

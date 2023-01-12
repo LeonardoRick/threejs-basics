@@ -1,7 +1,7 @@
 import { getRendererSceneCanvas, setupDefaultCameraAndScene } from '../utils';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
-import { Mesh, MeshMatcapMaterial, MeshNormalMaterial, TextureLoader, TorusGeometry } from 'three';
+import { DoubleSide, Mesh, MeshNormalMaterial, TorusGeometry } from 'three';
 import { applyOrbitControl } from '../cameras';
 const canvasId = 'default-webgl';
 // 3D Text notes:
@@ -17,6 +17,7 @@ export function threeDText() {
     const material = new MeshNormalMaterial();
     const fontLoader = new FontLoader();
     material.flatShading = true;
+    material.side = DoubleSide;
     fontLoader.load('/fonts/helvetiker_regular.typeface.json', (font) => {
         const textGeometry = new TextGeometry('Leonardo Rick', {
             font,

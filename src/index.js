@@ -31,7 +31,9 @@ import {
     toonMaterialExample,
 } from './materials';
 import { threeDText } from './geometries/text-buffer-geometry';
+import { ROUTES } from './routes';
 
+console.log('index.hs');
 // show three cubes with different colors in a scene
 // createCubeGroupSceneExample();
 
@@ -99,4 +101,11 @@ import { threeDText } from './geometries/text-buffer-geometry';
 // environmentMapExample();
 
 /* 3D TEXT */
-threeDText();
+// threeDText();
+const routesWrapper = document.getElementById('routes');
+ROUTES.forEach((route) => {
+    const a = document.createElement('a');
+    a.text = route;
+    a.href = `./${route}.html`;
+    routesWrapper.appendChild(a);
+});
