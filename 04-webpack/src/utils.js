@@ -12,10 +12,14 @@ export function getCubeSetup(
     const material = new MeshBasicMaterial({
         ...(texture ? { map: texture } : { color: 0xff0000 }),
     });
-    const mesh = new Mesh(new BoxGeometry(1, 1, 1), material);
 
+    const mesh = getCube(material);
     const camera = setupDefaultCameraAndScene(scene, renderer, mesh, width, height, resize);
     return [renderer, scene, mesh, camera, material];
+}
+
+export function getCube(material) {
+    return new Mesh(new BoxGeometry(1, 1, 1), material);
 }
 
 export function getRendererSceneCanvas(
@@ -78,6 +82,7 @@ export function setupDefaultCameraAndScene(
         scene.add(mesh);
     }
     scene.add(_camera); // https://github.com/mrdoob/three.js/issues/1046
+    renderer.render(scene, _camera);
     resize && setResizeListener(_camera, renderer);
     return _camera;
 }

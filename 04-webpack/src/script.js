@@ -30,6 +30,7 @@ import {
     standardMaterialExample,
     toonMaterialExample,
 } from './materials';
+import { threeDText } from './geometries/text-buffer-geometry';
 
 // show three cubes with different colors in a scene
 // createCubeGroupSceneExample();
@@ -95,4 +96,7 @@ import {
 // standardMaterialExample();
 
 // pay attention to the environment that is being reflected by the objects
-environmentMapExample();
+// environmentMapExample();
+
+/* 3D TEXT */
+threeDText();
