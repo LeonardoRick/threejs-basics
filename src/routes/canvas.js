@@ -12,7 +12,7 @@ import {
     orbitControlsExample,
 } from '../cameras';
 import { createMessyObjectExample, createTriangleExample } from '../geometries';
-import { debugGUIExample, setGUI } from '../debug';
+import { debugGUIExample } from '../debug';
 import {
     getRepeatExample,
     getCustomTextureExample,
@@ -31,6 +31,8 @@ import {
     toonMaterialExample,
 } from '../materials';
 import { threeDText } from '../geometries/text-buffer-geometry';
+import { lightsExample } from '../lights';
+import { shadowsExample } from '../shadows';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
@@ -87,12 +89,16 @@ const methodObject = {
     // pay attention to the environment that is being reflected by the objects
     environmentMapExample,
 
+    //text
     threeDText,
+
+    // lights
+    lightsExample,
+    shadowsExample,
 };
 
 // check if route exists and is not the index route
 if (currentRoute) {
-    console.log('hi');
     // check if route is present on object, otherwise redirects to index.html
     if (methodObject.hasOwnProperty(currentRoute)) {
         showExample();
@@ -104,4 +110,3 @@ if (currentRoute) {
 function showExample() {
     methodObject[currentRoute]();
 }
-// window.location.pathname = '/';

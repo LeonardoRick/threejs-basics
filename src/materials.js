@@ -82,10 +82,10 @@ function multipleMaterialsExample(material) {
     const camera = setupDefaultCameraAndScene(scene, renderer);
     const clock = new Clock();
     camera.position.z = 5;
-    scene.add(sphere, plane, torus);
-    scene.add(ambientLight, pointLight);
     sphere.position.x = -3;
     torus.position.x = 3;
+    scene.add(sphere, plane, torus);
+    scene.add(ambientLight, pointLight);
 
     // needed for ambient occlusion map to work. see the getMeshStandardMaterial example
     sphere.geometry.setAttribute('uv2', new BufferAttribute(sphere.geometry.attributes.uv.array, 2));
@@ -189,6 +189,7 @@ function getMeshStandardMaterial() {
     const doorMetalnessTexture = textureLoader.load('/textures/door/metalness.jpg');
     const doorRoughnessTexture = textureLoader.load('/textures/door/roughness.jpg');
     const doorNormalTexture = textureLoader.load('/textures/door/normal.jpg');
+
     // The MeshStandardMaterial uses physically based rendering principles. (PBR) Like the MeshLambertMaterial
     // and the MeshPhongMaterial, it supports lights but with a more realistic algorithm and better
     // parameters like roughness and metalness.

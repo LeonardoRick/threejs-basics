@@ -28,5 +28,9 @@ module.exports = {
             text: '3D Text',
             container: 'threeDtext',
         },
+        lights: {
+            text: 'Lights and Shadows',
+            container: 'lights',
+        },
     },
 };

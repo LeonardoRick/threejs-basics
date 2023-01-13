@@ -129,5 +129,9 @@ module.exports = {
         },
         // 3dText
         { name: 'threeDText', displayName: '3D Text', group: ROUTE_GROUPS.threeDtext },
+
+        // lights
+        { name: 'lightsExample', displayName: 'Lights', group: ROUTE_GROUPS.lights },
+        { name: 'shadowsExample', displayName: 'Shadows', group: ROUTE_GROUPS.lights },
     ],
 };
