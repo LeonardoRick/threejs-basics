@@ -20,11 +20,6 @@ module.exports = {
         path: path.resolve(__dirname, '../dist'),
     },
     devtool: 'source-map',
-    optimization: {
-        splitChunks: {
-            chunks: 'all',
-        },
-    },
     plugins: [
         new CopyWebpackPlugin({
             patterns: [{ from: path.resolve(__dirname, '../static') }],

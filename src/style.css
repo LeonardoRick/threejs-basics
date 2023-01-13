@@ -1,7 +1,6 @@
 body,
 html {
     margin: 0;
-    overflow: hidden;
     background-color: darkslategray;
     color: white;
     font-family: "Courier New", Courier, monospace;
@@ -40,9 +39,21 @@ a:hover {
     display: flex;
     gap: 8px;
 }
+
 #routes {
     padding: 12px;
     flex: 1;
-    /* overflow-y: auto; */
-    padding-bottom: 200px;
+}
+
+@media screen and (max-width: 576px) {
+    .group-container .child-routes {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    body,
+    html {
+        overflow: auto;
+    }
 }
