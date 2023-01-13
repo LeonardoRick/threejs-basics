@@ -1,4 +1,6 @@
-# Three.js Journey
+# Three.js Basics
+
+image.png
 
 ## Setup
 
