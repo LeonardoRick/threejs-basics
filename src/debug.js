@@ -29,6 +29,7 @@ export function getGUI() {
 }
 
 export function debugGUIExample() {
+    setGUI();
     const [renderer, scene, mesh, camera, material] = getCubeSetup(canvasId);
     applyOrbitControl(camera, document.getElementById(canvasId), renderer, scene);
     addTweak(mesh.position, 'x');

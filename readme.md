@@ -1,7 +1,7 @@
 # Three.js Journey
 
 ## Setup
-Download [Node.js](https://nodejs.org/en/download/).
+
 Run this followed commands:
 
 ``` bash
@@ -14,3 +14,10 @@ npm run dev
 # Build for production in the dist/ directory
 npm run build
 ```
+
+## Create another animation
+
+1) Choose the proper file (the one that is more related to the animation goal)
+2) Add the function call on `methodObject` in `canvas.js`
+3) Add the route on `routes.js`
+4) Reload server so routes can be added on webpack

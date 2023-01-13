@@ -4,17 +4,45 @@ html {
     overflow: hidden;
     background-color: darkslategray;
     color: white;
+    font-family: "Courier New", Courier, monospace;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+h2 {
+    margin-bottom: 14px;
 }
 p {
     margin: 0;
 }
 a {
-    color: white;
+    padding: 12px 24px;
+    background-color: rgb(99, 236, 191);
+    color: black;
+    transition: background-color 0.25s;
+}
+a:hover {
+    background-color: rgb(48, 201, 150);
 }
 
-#default-webgl {
-    position: fixed;
-    top: 0;
-    left: 0;
-    outline: none;
+.group-container {
+    border-bottom: 3px solid rgb(15, 37, 37);
+    padding-bottom: 12px;
+}
+.group-container .child-routes {
+    display: flex;
+    gap: 8px;
+}
+#routes {
+    padding: 12px;
+    flex: 1;
+    /* overflow-y: auto; */
+    padding-bottom: 200px;
 }

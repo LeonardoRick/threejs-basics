@@ -37,7 +37,7 @@ export function getTextureLoaderExample() {
     loadingManager.onError = () => console.log('onError');
     const textureLoader = new TextureLoader(loadingManager);
     const texture = textureLoader.load(
-        '/textures/color.jpg',
+        '/textures/door/color.jpg',
         //load
         () => console.log('textureLoader - load'),
         // progress (not commonly used)

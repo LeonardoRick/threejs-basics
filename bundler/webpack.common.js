@@ -2,12 +2,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
-const { ROUTES } = require('../src/routes');
+const { ROUTES } = require('../src/constants/routes');
 
 module.exports = {
     entry: ROUTES.reduce(
         (config, route) => {
-            config[route] = path.resolve(__dirname, `../src/routes/canvas.js`);
+            config[route.name] = path.resolve(__dirname, `../src/routes/canvas.js`);
             return config;
         },
         {
@@ -39,10 +39,9 @@ module.exports = {
                 new HtmlWebpackPlugin({
                     inject: true,
                     favicon: path.resolve(__dirname, '../static/images/favicon.ico'),
-                    // template: path.resolve(__dirname, `../src/routes/${route}.html`),
                     template: path.resolve(__dirname, `../src/routes/canvas.html`),
-                    filename: `${route}.html`,
-                    chunks: [route],
+                    filename: `${route.name}.html`,
+                    chunks: [route.name],
                 })
         ),
         new MiniCSSExtractPlugin(),
