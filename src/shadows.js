@@ -9,6 +9,8 @@ import {
     SphereGeometry,
     Scene,
     SpotLight,
+    Light,
+    PointLight,
 } from 'three';
 import { applyOrbitControl } from './cameras';
 import { getGUI, setGUI } from './debug';
@@ -27,10 +29,12 @@ export function shadowsExample() {
     const sphere = new Mesh(new SphereGeometry(0.5), new MeshStandardMaterial());
     const plane = new Mesh(new PlaneGeometry(5, 5), material);
     const camera = setupDefaultCameraAndScene(scene, renderer);
-    const ambientLight = new AmbientLight(0xffffff, 0.4);
+    const ambientLight = new AmbientLight(0xffffff, 0.3);
 
     setupDirectionalLight(scene);
     setupSpotLight(scene);
+    setupPointLight(scene);
+
     material.roughness = 0.7;
     plane.position.y = -0.65;
     plane.rotation.x = -Math.PI * 0.5;
@@ -70,7 +74,7 @@ export function shadowsExample() {
  * @returns {DirectionalLight} directionalLight
  */
 function setupDirectionalLight(scene) {
-    const directionalLight = new DirectionalLight(0xffffff, 0.4);
+    const directionalLight = new DirectionalLight(0xffffff, 0.3);
     directionalLight.position.set(2, 2, -1);
 
     directionalLight.castShadow = true;
@@ -83,8 +87,6 @@ function setupDirectionalLight(scene) {
 
     // we can change the near and the far of the camera of the light because we don't want
     // the light to iluminate behind or scene (we don't need it so we remove it)
-    const directionalLightCameraHelper = new CameraHelper(directionalLight.shadow.camera);
-
     directionalLight.shadow.camera.top = 2;
     directionalLight.shadow.camera.right = 2;
     directionalLight.shadow.camera.bottom = -2;
@@ -94,17 +96,9 @@ function setupDirectionalLight(scene) {
     directionalLight.shadow.camera.far = 6;
 
     directionalLight.shadow.radius = 10; // blur the shadow a little bit;
-    // since we updated the camera position the helper will only take effect if we update it on the next frame
-    window.requestAnimationFrame(() => directionalLightCameraHelper.update());
-    directionalLightCameraHelper.visible = false;
 
-    scene.add(directionalLight, directionalLightCameraHelper);
-    const directionalLightGuiFolder = gui.addFolder('Directional Light');
-    directionalLightGuiFolder.add(directionalLight, 'intensity').min(0).max(1).step(0.001);
-    directionalLightGuiFolder.add(directionalLight.position, 'x').min(-5).max(5).step(0.001);
-    directionalLightGuiFolder.add(directionalLight.position, 'y').min(-5).max(5).step(0.001);
-    directionalLightGuiFolder.add(directionalLight.position, 'z').min(-5).max(5).step(0.001);
-    directionalLightGuiFolder.add(directionalLightCameraHelper, 'visible').name('Camera Helper');
+    scene.add(directionalLight);
+    addLightGui(scene, directionalLight, 'Directional Light');
 
     return directionalLight;
 }
@@ -115,7 +109,7 @@ function setupDirectionalLight(scene) {
  * @returns {SpotLight} spotLight
  */
 function setupSpotLight(scene) {
-    const spotLight = new SpotLight(0xffffff, 0.4);
+    const spotLight = new SpotLight(0xffffff, 0.3);
     spotLight.distance = 10;
     spotLight.angle = Math.PI * 0.3;
     spotLight.position.set(0, 2, 3);
@@ -132,15 +126,54 @@ function setupSpotLight(scene) {
     spotLight.shadow.camera.near = 1;
     spotLight.shadow.camera.far = 6;
 
-    const spotLightCameraHelper = new CameraHelper(spotLight.shadow.camera);
-    scene.add(spotLight, spotLight.target, spotLightCameraHelper);
-    spotLightCameraHelper.visible = false;
-
-    const spotLightGuiFolder = gui.addFolder('Spot Light');
-    spotLightGuiFolder.add(spotLight, 'intensity').min(0).max(1).step(0.001);
-    spotLightGuiFolder.add(spotLight.position, 'x').min(-5).max(5).step(0.001);
-    spotLightGuiFolder.add(spotLight.position, 'y').min(-5).max(5).step(0.001);
-    spotLightGuiFolder.add(spotLight.position, 'z').min(-5).max(5).step(0.001);
-    spotLightGuiFolder.add(spotLightCameraHelper, 'visible').name('Camera Helper');
+    // on spot light specifically we need to add the spotLight.target at the scene as well
+    scene.add(spotLight, spotLight.target);
+    addLightGui(scene, spotLight, 'Spot Light');
     return spotLight;
+}
+
+/**
+ *
+ * @param {Scene} scene
+ * @returns {Light} pointLight
+ */
+function setupPointLight(scene) {
+    const pointLight = new PointLight(0xffffff, 0.3);
+    pointLight.castShadow = true;
+    pointLight.position.set(-1, 1, 0);
+
+    // increasing this values improve the quality of our shadow, but is less performant.
+    // keep in ming that we need to use power of 2 values (4, 8, 12, 16) because of the
+    // mipmaping. See texture.js notes for further understanding;
+    pointLight.shadow.mapSize.width = 1024;
+    pointLight.shadow.mapSize.height = 1024;
+
+    pointLight.shadow.camera.near = 0.1;
+    pointLight.shadow.camera.far = 5;
+    scene.add(pointLight);
+    // the point light helper is weird because it uses a perspective camera 6 times to create an illumination in
+    // every direciton. The helper that we can see, is the last position of the camera (usually pointing to bottom)
+
+    // we cant' control the field of view on the point light because it illuminates in every direction
+    addLightGui(scene, pointLight, 'Point Light');
+    return pointLight;
+}
+/**
+ * @param {Scene} scene
+ * @param {Light} light
+ * @param {string} name
+ */
+function addLightGui(scene, light, name) {
+    const cameraHelper = new CameraHelper(light.shadow.camera);
+    // since we updated the camera position the helper will only take effect if we update it on the next frame
+    window.requestAnimationFrame(() => cameraHelper.update());
+    cameraHelper.visible = false;
+    scene.add(cameraHelper);
+
+    const lightGuiFolder = gui.addFolder(name);
+    lightGuiFolder.add(light, 'intensity').min(0).max(1).step(0.001);
+    lightGuiFolder.add(light.position, 'x').min(-5).max(5).step(0.001);
+    lightGuiFolder.add(light.position, 'y').min(-5).max(5).step(0.001);
+    lightGuiFolder.add(light.position, 'z').min(-5).max(5).step(0.001);
+    lightGuiFolder.add(cameraHelper, 'visible').name('Camera Helper');
 }
