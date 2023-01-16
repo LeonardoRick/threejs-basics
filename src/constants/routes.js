@@ -133,5 +133,7 @@ module.exports = {
         // lights
         { name: 'lightsExample', displayName: 'Lights', group: ROUTE_GROUPS.lights },
         { name: 'shadowsExample', displayName: 'Shadows', group: ROUTE_GROUPS.lights },
+        { name: 'animatedShadowExample', displayName: 'Animated Texture Shadow', group: ROUTE_GROUPS.lights },
+        { name: 'bakedShadowExample', displayName: 'Baked Texture Shadow', group: ROUTE_GROUPS.lights },
     ],
 };

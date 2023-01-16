@@ -32,7 +32,7 @@ import {
 } from '../materials';
 import { threeDText } from '../geometries/text-buffer-geometry';
 import { lightsExample } from '../lights';
-import { shadowsExample } from '../shadows';
+import { shadowsExample, animatedShadowExample, bakedShadowExample } from '../shadows';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
@@ -95,6 +95,8 @@ const methodObject = {
     // lights
     lightsExample,
     shadowsExample,
+    animatedShadowExample,
+    bakedShadowExample,
 };
 
 // check if route exists and is not the index route
