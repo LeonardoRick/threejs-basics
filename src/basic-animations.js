@@ -119,10 +119,15 @@ export function animateExternalMeshWithClock(mesh, renderer, scene, camera) {
     tick();
 }
 
-// allow objects and camera to have its properties re-rendered on the screen when some value change.
-
-// this should be called everywhere because for screen resizing to do not distort our object,
-// it need to rerender the scene
+/**
+ * allow objects and camera to have its properties re-rendered on the screen when some value change.
+ * this should be called everywhere because for screen resizing to do not distort our object,
+ * it need to rerender the scene
+ * @param {import('three').Renderer} renderer
+ * @param {import('three').Scene} scene
+ * @param {import('three').Camera} camera
+ * @param {() => void} callback
+ */
 export function loopAnimation(renderer, scene, camera, callback = () => {}) {
     const animate = () => {
         callback();

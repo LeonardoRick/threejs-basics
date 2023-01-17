@@ -81,7 +81,7 @@ module.exports = {
             displayName: 'Nearest Filter',
             group: ROUTE_GROUPS.textures,
         },
-        //materials
+        // materials
         {
             name: 'basicMaterialExample',
             displayName: 'Basic Material',
@@ -135,5 +135,9 @@ module.exports = {
         { name: 'shadowsExample', displayName: 'Shadows', group: ROUTE_GROUPS.lights },
         { name: 'animatedShadowExample', displayName: 'Animated Texture Shadow', group: ROUTE_GROUPS.lights },
         { name: 'bakedShadowExample', displayName: 'Baked Texture Shadow', group: ROUTE_GROUPS.lights },
+
+        // particles
+        { name: 'particlesExample', displayName: 'Particles', group: ROUTE_GROUPS.particles },
+        { name: 'particlesWaveExample', displayName: 'Particles Wave', group: ROUTE_GROUPS.particles },
     ],
 };

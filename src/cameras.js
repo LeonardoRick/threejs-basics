@@ -65,6 +65,13 @@ export function orbitControlsExample() {
     applyOrbitControl(camera, canvas, renderer, scene);
 }
 
+/**
+ *
+ * @param {import('three').Camera} camera
+ * @param {import('three').Canvas} canvas
+ * @param {import('three').Renderer} renderer
+ * @param {import('three').Scene} scene
+ */
 export function applyOrbitControl(camera, canvas, renderer, scene) {
     const controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;

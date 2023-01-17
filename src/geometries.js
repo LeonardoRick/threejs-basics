@@ -43,9 +43,10 @@ function createRandomObject(
     const [renderer, scene] = getRendererSceneCanvas(canvasId, width, height, allowFullScreen);
 
     const count = 100;
-    // each 3 indexes are a vertex (x, y z)
-    const positionsArray = new Float32Array(count * 3 * 3);
-    for (let i = 0; i < count * 3 * 3; i++) {
+    // each 3 indexes are a single vertex (x, y z) of a 'triangle' (3 vertexes, so 3 *3)
+    const positionsArrayLength = count * 3 * 3;
+    const positionsArray = new Float32Array(positionsArrayLength);
+    for (let i = 0; i < positionsArrayLength; i++) {
         positionsArray[i] = (Math.random() - 0.5) * count;
     }
     const mesh = getCustomMesh(positionsArray);

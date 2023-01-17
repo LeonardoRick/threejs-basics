@@ -32,5 +32,9 @@ module.exports = {
             text: 'Lights and Shadows',
             container: 'lights',
         },
+        particles: {
+            text: 'Particles',
+            container: 'particles',
+        },
     },
 };
