@@ -99,7 +99,7 @@ export function bakedShadowExample() {
 /**
  *
  * @returns {{
- *  renderer: import('three').Renderer, scene: Scene, canvas: import('three').Canvas,
+ *  renderer: import('three').Renderer, scene: Scene, canvas: HTMLCanvasElement,
  *  camera: PerspectiveCamera, material: MeshStandardMaterial, sphere: Mesh, plane: Mesh
  * }}
  */

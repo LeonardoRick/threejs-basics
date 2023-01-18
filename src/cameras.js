@@ -68,7 +68,7 @@ export function orbitControlsExample() {
 /**
  *
  * @param {import('three').Camera} camera
- * @param {import('three').Canvas} canvas
+ * @param {HTMLCanvasElement} canvas
  * @param {import('three').Renderer} renderer
  * @param {import('three').Scene} scene
  */

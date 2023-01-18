@@ -139,5 +139,6 @@ module.exports = {
         // particles
         { name: 'particlesExample', displayName: 'Particles', group: ROUTE_GROUPS.particles },
         { name: 'particlesWaveExample', displayName: 'Particles Wave', group: ROUTE_GROUPS.particles },
+        { name: 'galaxyGeneratorExample', displayName: 'Galaxy Generator', group: ROUTE_GROUPS.particles },
     ],
 };
