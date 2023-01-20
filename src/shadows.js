@@ -21,8 +21,7 @@ import { applyOrbitControl } from './cameras';
 import { getGUI, setGUI } from './debug';
 import { getRendererSceneCanvas, setupDefaultCameraAndScene } from './utils';
 
-setGUI();
-const gui = getGUI();
+let gui;
 const canvasId = 'default-webgl';
 
 // shadow notes
@@ -33,6 +32,8 @@ const textureLoader = new TextureLoader();
 const ambientLight = new AmbientLight(0xffffff, 0.3);
 
 export function shadowsExample() {
+    setGUI();
+    gui = getGUI();
     const { scene, camera, sphere, plane } = getBasicShadowsSetup();
     setupDirectionalLight(scene);
     setupSpotLight(scene);

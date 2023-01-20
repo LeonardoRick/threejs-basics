@@ -140,5 +140,13 @@ module.exports = {
         { name: 'particlesExample', displayName: 'Particles', group: ROUTE_GROUPS.particles },
         { name: 'particlesWaveExample', displayName: 'Particles Wave', group: ROUTE_GROUPS.particles },
         { name: 'galaxyGeneratorExample', displayName: 'Galaxy Generator', group: ROUTE_GROUPS.particles },
+
+        // raycaster
+        { name: 'raycasterLineExample', displayName: 'Horizontal Line', group: ROUTE_GROUPS.raycaster },
+        {
+            name: 'raycasterMouseHoverExample',
+            displayName: 'Mouse Hovering/Clicking',
+            group: ROUTE_GROUPS.raycaster,
+        },
     ],
 };

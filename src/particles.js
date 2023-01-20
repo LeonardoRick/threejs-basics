@@ -18,13 +18,14 @@ import { getGUI, setGUI } from './debug';
 import { getRendererSceneCanvas, setupDefaultCameraAndScene } from './utils';
 
 const canvasId = 'default-webgl';
-setGUI();
-const gui = getGUI();
+let gui;
 // Particles Notes:
 // Particle assets pack:  https://www.kenney.nl/assets/particle-pack
 // Creator of the particles pack: https://twitter.com/KenneyNL
 
 export function particlesExample(animate = false) {
+    setGUI();
+    gui = getGUI();
     const textureLoader = new TextureLoader();
     const particleTexture = textureLoader.load('/textures/particles/3.png');
     // Particles

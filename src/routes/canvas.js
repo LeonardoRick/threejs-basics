@@ -34,6 +34,7 @@ import { threeDText } from '../geometries/text-buffer-geometry';
 import { lightsExample } from '../lights';
 import { shadowsExample, animatedShadowExample, bakedShadowExample } from '../shadows';
 import { particlesExample, particlesWaveExample, galaxyGeneratorExample } from '../particles';
+import { raycasterLineExample, raycasterMouseHoverExample } from '../raycaster';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
@@ -103,6 +104,10 @@ const methodObject = {
     particlesExample,
     particlesWaveExample,
     galaxyGeneratorExample,
+
+    // raycaster
+    raycasterLineExample,
+    raycasterMouseHoverExample,
 };
 
 // check if route exists and is not the index route

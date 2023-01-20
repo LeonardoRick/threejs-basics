@@ -36,5 +36,9 @@ module.exports = {
             text: 'Particles',
             container: 'particles',
         },
+        raycaster: {
+            text: 'Raycaster',
+            container: 'raycaster',
+        },
     },
 };
