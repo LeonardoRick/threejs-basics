@@ -59,68 +59,68 @@ module.exports = {
         {
             name: 'getRepeatExample',
             displayName: 'Repeat Example',
-            group: ROUTE_GROUPS.textures,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'getCustomTextureExample',
             displayName: 'Custom Texture',
-            group: ROUTE_GROUPS.textures,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'getTextureLoaderExample',
             displayName: 'Texture Loader',
-            group: ROUTE_GROUPS.textures,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'getRotationExample',
             displayName: 'Rotation',
-            group: ROUTE_GROUPS.textures,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'getNearestFilterExample',
             displayName: 'Nearest Filter',
-            group: ROUTE_GROUPS.textures,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         // materials
         {
             name: 'basicMaterialExample',
             displayName: 'Basic Material',
-            group: ROUTE_GROUPS.materials,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'environmentMapExample',
             displayName: 'Environment Map',
-            group: ROUTE_GROUPS.materials,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'lamberMaterialExample',
             displayName: 'Lamber',
-            group: ROUTE_GROUPS.materials,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'matcapMaterialExample',
             displayName: 'Matcap',
-            group: ROUTE_GROUPS.materials,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'normalMaterialExample',
             displayName: 'Normal Material',
-            group: ROUTE_GROUPS.materials,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'phongMaterialExample',
             displayName: 'Phong',
-            group: ROUTE_GROUPS.materials,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'standardMaterialExample',
             displayName: 'Standard Material',
-            group: ROUTE_GROUPS.materials,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'toonMaterialExample',
             displayName: 'Toon',
-            group: ROUTE_GROUPS.materials,
+            group: ROUTE_GROUPS.texturesMaterials,
         },
         {
             name: 'debugGUIExample',

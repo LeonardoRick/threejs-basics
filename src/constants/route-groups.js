@@ -16,13 +16,9 @@ module.exports = {
             text: 'Debug (lil-gui)',
             container: 'debug',
         },
-        textures: {
-            text: 'Textures',
+        texturesMaterials: {
+            text: 'Textures and Materials',
             container: 'textures',
-        },
-        materials: {
-            text: 'Materials',
-            container: 'materials',
         },
         threeDtext: {
             text: '3D Text',

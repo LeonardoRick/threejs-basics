@@ -70,14 +70,13 @@ const methodObject = {
     /* debug */
     debugGUIExample,
 
-    /* textures */
+    /* textures and materials */
     getRepeatExample,
     getCustomTextureExample,
     getTextureLoaderExample,
     getRotationExample,
     getNearestFilterExample,
 
-    /* materials */
     basicMaterialExample,
 
     lamberMaterialExample,

@@ -37,6 +37,7 @@ a:hover {
 }
 .group-container .child-routes {
     display: flex;
+    flex-wrap: wrap;
     gap: 8px;
 }
 
