@@ -29,6 +29,7 @@ export function setGUI(width = 400) {
 }
 
 export function getGUI() {
+    setGUI();
     return gui;
 }
 

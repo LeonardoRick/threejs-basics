@@ -14,18 +14,16 @@ import {
 } from 'three';
 import { loopAnimation } from './basic-animations';
 import { applyOrbitControl } from './cameras';
-import { getGUI, setGUI } from './debug';
+import { getGUI } from './debug';
 import { getRendererSceneCanvas, setupDefaultCameraAndScene } from './utils';
 
 const canvasId = 'default-webgl';
-let gui;
 // Particles Notes:
 // Particle assets pack:  https://www.kenney.nl/assets/particle-pack
 // Creator of the particles pack: https://twitter.com/KenneyNL
 
 export function particlesExample(animate = false) {
-    setGUI();
-    gui = getGUI();
+    const gui = getGUI();
     const textureLoader = new TextureLoader();
     const particleTexture = textureLoader.load('/textures/particles/3.png');
     // Particles
@@ -104,6 +102,7 @@ let material;
 let points;
 
 export function galaxyGeneratorExample() {
+    const gui = getGUI();
     const [renderer, scene, canvas] = getRendererSceneCanvas(canvasId);
     const camera = setupDefaultCameraAndScene(scene, renderer);
     const parameters = {
