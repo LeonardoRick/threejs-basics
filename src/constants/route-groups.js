@@ -12,17 +12,9 @@ module.exports = {
             text: 'Geometries',
             container: 'geometries',
         },
-        debug: {
-            text: 'Debug (lil-gui)',
-            container: 'debug',
-        },
         texturesMaterials: {
             text: 'Textures and Materials',
             container: 'textures',
-        },
-        threeDtext: {
-            text: '3D Text',
-            container: 'threeDtext',
         },
         lights: {
             text: 'Lights and Shadows',
@@ -35,6 +27,10 @@ module.exports = {
         raycaster: {
             text: 'Raycaster',
             container: 'raycaster',
+        },
+        others: {
+            text: 'Others',
+            container: 'others',
         },
     },
 };

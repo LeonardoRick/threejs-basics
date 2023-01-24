@@ -35,6 +35,7 @@ import { lightsExample } from '../lights';
 import { shadowsExample, animatedShadowExample, bakedShadowExample } from '../shadows';
 import { particlesExample, particlesWaveExample, galaxyGeneratorExample } from '../particles';
 import { raycasterLineExample, raycasterMouseHoverExample } from '../raycaster';
+import { physicsExample } from '../physics';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
@@ -67,8 +68,6 @@ const methodObject = {
     createTriangleExample,
     // draw random triangles inside a space range creating a messy format
     createMessyObjectExample,
-    /* debug */
-    debugGUIExample,
 
     /* textures and materials */
     getRepeatExample,
@@ -90,9 +89,6 @@ const methodObject = {
     // pay attention to the environment that is being reflected by the objects
     environmentMapExample,
 
-    //text
-    threeDText,
-
     // lights
     lightsExample,
     shadowsExample,
@@ -107,6 +103,11 @@ const methodObject = {
     // raycaster
     raycasterLineExample,
     raycasterMouseHoverExample,
+
+    //others
+    threeDText,
+    debugGUIExample,
+    physicsExample,
 };
 
 // check if route exists and is not the index route

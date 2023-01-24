@@ -122,14 +122,6 @@ module.exports = {
             displayName: 'Toon',
             group: ROUTE_GROUPS.texturesMaterials,
         },
-        {
-            name: 'debugGUIExample',
-            displayName: 'debug GUI',
-            group: ROUTE_GROUPS.debug,
-        },
-        // 3dText
-        { name: 'threeDText', displayName: '3D Text', group: ROUTE_GROUPS.threeDtext },
-
         // lights
         { name: 'lightsExample', displayName: 'Lights', group: ROUTE_GROUPS.lights },
         { name: 'shadowsExample', displayName: 'Shadows', group: ROUTE_GROUPS.lights },
@@ -148,5 +140,14 @@ module.exports = {
             displayName: 'Mouse Hovering/Clicking',
             group: ROUTE_GROUPS.raycaster,
         },
+
+        // others
+        {
+            name: 'debugGUIExample',
+            displayName: 'debug GUI',
+            group: ROUTE_GROUPS.others,
+        },
+        { name: 'threeDText', displayName: '3D Text', group: ROUTE_GROUPS.others },
+        { name: 'physicsExample', displayName: 'Physics', group: ROUTE_GROUPS.others },
     ],
 };
