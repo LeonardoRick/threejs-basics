@@ -36,6 +36,7 @@ import { shadowsExample, animatedShadowExample, bakedShadowExample } from '../sh
 import { particlesExample, particlesWaveExample, galaxyGeneratorExample } from '../particles';
 import { raycasterLineExample, raycasterMouseHoverExample } from '../raycaster';
 import { physicsExample } from '../physics';
+import { importDuckExample } from '../import-models';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
@@ -104,6 +105,8 @@ const methodObject = {
     raycasterLineExample,
     raycasterMouseHoverExample,
 
+    // models
+    importDuckExample,
     //others
     threeDText,
     debugGUIExample,

@@ -141,6 +141,13 @@ module.exports = {
             group: ROUTE_GROUPS.raycaster,
         },
 
+        // models
+        {
+            name: 'importDuckExample',
+            displayName: 'Duck',
+            group: ROUTE_GROUPS.models,
+        },
+
         // others
         {
             name: 'debugGUIExample',

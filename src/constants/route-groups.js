@@ -28,6 +28,10 @@ module.exports = {
             text: 'Raycaster',
             container: 'raycaster',
         },
+        models: {
+            text: 'Models',
+            container: 'models',
+        },
         others: {
             text: 'Others',
             container: 'others',
