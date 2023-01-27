@@ -1,9 +1,10 @@
 // Physics notes:
 
-import CANNON from 'cannon';
+import * as CANNON from 'cannon-es';
 
 import {
     AmbientLight,
+    BoxGeometry,
     Clock,
     CubeTextureLoader,
     DirectionalLight,
@@ -12,8 +13,8 @@ import {
     PCFShadowMap,
     PlaneGeometry,
     SphereGeometry,
-    TextureLoader,
 } from 'three';
+import { getGUI } from './debug';
 import { loopAnimation } from './basic-animations';
 
 import { applyOrbitControl } from './cameras';
@@ -28,23 +29,57 @@ import { getRendererSceneCanvas, setupDefaultCameraAndScene } from './utils';
 
 // npm i cannon
 
+// The physics run on CPU and threejs runs on GPU
+
 // Threejs Cannon equivalents
 // - Scene -> World
 // - Mesh -> Body
 // - Geometry -> Shape
 
-// Questions:
-// Why my threejs floor updated its posistion to mathc the cannon floorBoby
-// Instantly when we aedded it to the CANNON.world?
+// When testing the collisions between objects, the default approach is testing every Body against every other Body.
+// While this is easy to do, it's costly in terms of performance. This algorithim moment of testing colisions is called broadphase
+
+// if you have objects that you know that they 'ill never colide, you can increase the performance by changing the broadphase algorithm
+
+// There are 3 broadphase algorithms available in Cannon.js:
+
+// NaiveBroadphase: Tests every Bodies against every other Bodies
+// GridBroadphase: Quadrilles the world and only tests Bodies against other Bodies in the same grid box or the neighbors' grid boxes.
+// SAPBroadphase (Sweep and prune broadphase): Tests Bodies on arbitrary axes during multiples steps. (More performant and straightforward)
+
+// Constraints: https://threejs-journey.com/lessons/physics#constraints
+// Constraints, as the name suggests, enable constraints between two bodies. We won't cover those in this lesson, but here's the list of constraints:
+
+// HingeConstraint: acts like a door hinge.
+// DistanceConstraint: forces the bodies to keep a distance between each other.
+// LockConstraint: merges the bodies like if they were one piece.
+// PointToPointConstraint: glues the bodies to a specific point.
+
 const canvasId = 'default-webgl';
 
 export function physicsExample() {
+    const gui = getGUI();
     const [renderer, scene, canvas] = getRendererSceneCanvas(canvasId);
     const camera = setupDefaultCameraAndScene(scene, renderer);
     applyOrbitControl(camera, canvas, renderer, scene);
     camera.position.set(-3, 3, 6);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = PCFShadowMap;
+
+    /**
+     * Sounds
+     */
+    const hitSound = new Audio('/sounds/hit2.mp3');
+
+    const playHitSound = (collideEvent) => {
+        const impactStrength = collideEvent.contact.getImpactVelocityAlongNormal();
+        const mass = collideEvent.target.mass;
+        if (impactStrength > 1.5) {
+            hitSound.volume = mass > 1 ? 1 : mass;
+            hitSound.currentTime = 0;
+            hitSound.play();
+        }
+    };
 
     /**
      * Textures
@@ -73,20 +108,57 @@ export function physicsExample() {
         friction: 0.1,
         restitution: 0.7,
     });
+    // increase perfomance on colision detection. (See notes).
+    // usually we have the same behavior but it can change on objects travelling too fast.
+    //if it is not a problem to miss some colisions while very fast, use it as well!
+    world.broadphase = new CANNON.SAPBroadphase(world);
+    // if an object is not moving and don't touching any other body for too long,  it sleeps
+    // and the physics are not tested until some force being applies on it again, what will
+    // wake the body up,
+    world.allowSleep = true;
     world.defaultContactMaterial = defaultContactMaterial;
 
+    const debugObject = {
+        createSphere: () => {
+            createSphere(Math.random(), { x: Math.random() - 0.5, y: 3, z: Math.random() - 0.5 });
+        },
+        createBox: () => {
+            createBox(Math.random() + 0.2, { x: Math.random() - 0.5, y: 3, z: Math.random() - 0.5 });
+        },
+        reset: () => {
+            for (const obj of objectsToUpdate) {
+                // remove body
+                obj.body.removeEventListener('collide', hitSound);
+                world.removeBody(obj.body);
+                // remove mesh
+                scene.remove(obj.mesh);
+            }
+            objectsToUpdate = [];
+        },
+    };
+    gui.add(debugObject, 'createSphere');
+    gui.add(debugObject, 'createBox');
+    gui.add(debugObject, 'reset');
     /**
      * @type {Array<{ mesh: Mesh, body: CANNON.Body }>}
      */
-    const objectsToUpdate = [];
+    let objectsToUpdate = [];
 
+    const sphereGeometry = new SphereGeometry(1, 32, 32);
+    const material = new MeshStandardMaterial({
+        metalness: 0.3,
+        roughness: 0.4,
+        envMap: environmentMapTexture,
+        envMapIntensity: 0.5,
+    });
     const { body: sphereBody } = createSphere(0.5, { x: 0, y: 3, z: 0 });
-    createSphere(0.5, { x: -3, y: 3, z: -2 });
 
-    // applyLocal force will apply a force with a specified origin on the second parameter.
+    // applyLocalForce will apply a force with a specified origin on the second parameter.
     // if you want to the origin to be the body, use applyForce().
     // The 150 number is the strenght of the force applied
     sphereBody.applyLocalForce(new CANNON.Vec3(150, 0, 0), new CANNON.Vec3(0, 0, 0));
+
+    const boxGeometry = new BoxGeometry(1, 1, 1);
 
     // Physics - Floor
     // this logical plane is infinite so it do not have edges and it fills the entire view
@@ -161,9 +233,8 @@ export function physicsExample() {
 
         for (const object of objectsToUpdate) {
             object.mesh.position.copy(object.body.position);
+            object.mesh.quaternion.copy(object.body.quaternion); // on cannon js we dont' use rotation, we use quaternion
         }
-
-        // console.log(sphere.position);
     });
 
     /**
@@ -172,20 +243,14 @@ export function physicsExample() {
      * @param {{x: number, y: number, z: number}} position
      */
     function createSphere(radius, position) {
-        console.log('createSphere');
         /**
-         * Test sphere
+         * Sphere
          */
-
-        const mesh = new Mesh(
-            new SphereGeometry(radius, 32, 32),
-            new MeshStandardMaterial({
-                metalness: 0.3,
-                roughness: 0.4,
-                envMap: environmentMapTexture,
-                envMapIntensity: 0.5,
-            })
-        );
+        // creating a single geometry to every sphere we increase performance. To be
+        // able to change the readius we can set the geometry with a default radius 1
+        // and scale the entire mesh with the radius value
+        const mesh = new Mesh(sphereGeometry, material);
+        mesh.scale.set(radius, radius, radius);
         mesh.castShadow = true;
         mesh.position.copy(position);
         scene.add(mesh);
@@ -194,10 +259,39 @@ export function physicsExample() {
         const shape = new CANNON.Sphere(radius);
         const body = new CANNON.Body({
             mass: 1,
-            position: new CANNON.Vec3(0, 3, 0),
             shape,
         });
         body.position.copy(position);
+        world.addBody(body);
+        const obj = { mesh, body };
+        objectsToUpdate.push(obj);
+        return obj;
+    }
+
+    /**
+     * @param {number} size
+     * @param {{x: number, y: number, z: number}} posistion
+     */
+    function createBox(size, posistion) {
+        const mesh = new Mesh(boxGeometry, material);
+        mesh.scale.set(size, size, size);
+        mesh.castShadow = true;
+        mesh.position.copy(posistion);
+
+        scene.add(mesh);
+
+        // Physics - Box
+        // To create a box in CANNON its different than on THREE.js. its based on a halfExtents property which is,
+        // in a nutshell, the width, height and depth divided by 2
+        const shape = new CANNON.Box(new CANNON.Vec3(size * 0.5, size * 0.5, size * 0.5));
+        const body = new CANNON.Body({
+            // if we set the mass to 0 the object will not move
+            mass: size,
+            shape,
+            type: 'static',
+        });
+        body.position.copy(posistion);
+        body.addEventListener('collide', playHitSound);
         world.addBody(body);
         const obj = { mesh, body };
         objectsToUpdate.push(obj);
