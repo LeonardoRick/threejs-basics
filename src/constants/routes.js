@@ -3,6 +3,11 @@ module.exports = {
     ROUTES: [
         // basicAnimations
         {
+            name: 'minimalSetup',
+            displayName: 'Minimal Setup',
+            group: ROUTE_GROUPS.basicAnimations,
+        },
+        {
             name: 'createCubeGroupSceneExample',
             displayName: 'Cube Group Scene',
             group: ROUTE_GROUPS.basicAnimations,
@@ -146,6 +151,11 @@ module.exports = {
             name: 'importDuckExample',
             displayName: 'Duck',
             group: ROUTE_GROUPS.models,
+        },
+        {
+            name: 'realisticRender',
+            displayName: 'Realistic Render',
+            group: ROUTE_GROUPS.rendering,
         },
 
         // others

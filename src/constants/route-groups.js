@@ -32,6 +32,10 @@ module.exports = {
             text: 'Models',
             container: 'models',
         },
+        rendering: {
+            text: 'Rendering',
+            container: 'rendering',
+        },
         others: {
             text: 'Others',
             container: 'others',

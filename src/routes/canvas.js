@@ -4,22 +4,23 @@ import {
     animateCubeWithTimeExample,
     animateCubeWithClockExample,
     animateWithGsapExample,
-} from '../basic-animations';
+    minimalSetup,
+} from '../examples/basic-animations';
 import {
     perspectiveCameraExample,
     ortogarphicCameraExample,
     movePerspectiveCameraWithMouseExample,
     orbitControlsExample,
-} from '../cameras';
-import { createMessyObjectExample, createTriangleExample } from '../geometries';
-import { debugGUIExample } from '../debug';
+} from '../examples/cameras';
+import { createMessyObjectExample, createTriangleExample } from '../examples/geometries';
+import { debugGUIExample } from '../examples/debug';
 import {
     getRepeatExample,
     getCustomTextureExample,
     getTextureLoaderExample,
     getRotationExample,
     getNearestFilterExample,
-} from '../textures';
+} from '../examples/textures';
 import {
     basicMaterialExample,
     environmentMapExample,
@@ -29,19 +30,21 @@ import {
     phongMaterialExample,
     standardMaterialExample,
     toonMaterialExample,
-} from '../materials';
-import { threeDText } from '../geometries/text-buffer-geometry';
-import { lightsExample } from '../lights';
-import { shadowsExample, animatedShadowExample, bakedShadowExample } from '../shadows';
-import { particlesExample, particlesWaveExample, galaxyGeneratorExample } from '../particles';
-import { raycasterLineExample, raycasterMouseHoverExample } from '../raycaster';
-import { physicsExample } from '../physics';
-import { importDuckExample } from '../import-models';
+} from '../examples/materials';
+import { threeDText } from '../examples/geometries/text-buffer-geometry';
+import { lightsExample } from '../examples/lights';
+import { shadowsExample, animatedShadowExample, bakedShadowExample } from '../examples/shadows';
+import { particlesExample, particlesWaveExample, galaxyGeneratorExample } from '../examples/particles';
+import { raycasterLineExample, raycasterMouseHoverExample } from '../examples/raycaster';
+import { physicsExample } from '../examples/physics';
+import { realisticRender } from '../examples/realistic-render';
+import { importDuckExample } from '../examples/import-models';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
 const methodObject = {
     /* basicAnimations */
+    minimalSetup,
     // show three cubes with different colors in a scene
     createCubeGroupSceneExample,
     // show a red cube rotating fixed on the axis Y
@@ -107,6 +110,10 @@ const methodObject = {
 
     // models
     importDuckExample,
+
+    // rendering
+    realisticRender,
+
     //others
     threeDText,
     debugGUIExample,

@@ -1,4 +1,12 @@
-import { PerspectiveCamera, Scene, WebGLRenderer, Mesh, BoxGeometry, MeshBasicMaterial } from 'three';
+import {
+    PerspectiveCamera,
+    Scene,
+    WebGLRenderer,
+    Mesh,
+    BoxGeometry,
+    MeshBasicMaterial,
+    SphereGeometry,
+} from 'three';
 
 export function getCubeSetup(
     canvasId,
@@ -21,15 +29,20 @@ export function getCubeSetup(
 export function getCube(material) {
     return new Mesh(new BoxGeometry(1, 1, 1), material);
 }
+export function getSphere(material) {
+    return new Mesh(new SphereGeometry(1, 32, 32), material);
+}
 
 export function getRendererSceneCanvas(
     canvasId,
     width = window.innerWidth,
     height = window.innerHeight,
-    allowFullScreen = true
+    allowFullScreen = true,
+    // affects performance but gives a better rendering
+    antialias = false
 ) {
     const canvas = document.getElementById(canvasId);
-    const renderer = new WebGLRenderer({ canvas });
+    const renderer = new WebGLRenderer({ canvas, antialias });
     const scene = new Scene();
     updateRendererSizeRatio(renderer, width, height);
     allowFullScreen && setFullScreenListener(canvas);
