@@ -152,12 +152,17 @@ module.exports = {
             displayName: 'Duck',
             group: ROUTE_GROUPS.models,
         },
+        //rendering
         {
             name: 'realisticRender',
             displayName: 'Realistic Render',
             group: ROUTE_GROUPS.rendering,
         },
-
+        {
+            name: 'animatedFoxExample',
+            displayName: 'Animated Fox',
+            group: ROUTE_GROUPS.rendering,
+        },
         // others
         {
             name: 'debugGUIExample',

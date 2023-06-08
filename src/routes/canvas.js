@@ -38,6 +38,7 @@ import { particlesExample, particlesWaveExample, galaxyGeneratorExample } from '
 import { raycasterLineExample, raycasterMouseHoverExample } from '../examples/raycaster';
 import { physicsExample } from '../examples/physics';
 import { realisticRender } from '../examples/realistic-render';
+import { animatedFoxExample } from '../examples/animated-fox';
 import { importDuckExample } from '../examples/import-models';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
@@ -113,6 +114,7 @@ const methodObject = {
 
     // rendering
     realisticRender,
+    animatedFoxExample,
 
     //others
     threeDText,
