@@ -23,7 +23,7 @@ Object.values(ROUTE_GROUPS).forEach((group) => {
 ROUTES.forEach((route) => {
     const a = document.createElement('a');
     a.text = route.displayName;
-    a.href = `./${route.name}.html`;
+    a.href = `./${route.name}.html${route.debug ? '#debug' : ''}`;
     const parent = document.getElementById(route.group.container);
     const childRoutesDiv = parent.getElementsByClassName('child-routes')[0];
     childRoutesDiv.appendChild(a);

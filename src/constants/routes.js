@@ -162,6 +162,7 @@ module.exports = {
             name: 'animatedFoxExample',
             displayName: 'Animated Fox',
             group: ROUTE_GROUPS.rendering,
+            debug: true,
         },
         // others
         {
