@@ -56,8 +56,6 @@ export default class Fox {
 
     setAnimation() {
         this.animation.mixer = new AnimationMixer(this.model);
-        // this.animation.action = this.animation.mixer.clipAction(this.source.animations[0]);
-        // this.animation.action.play();
 
         this.animation.actions = {};
         this.animation.actions.idle = this.animation.mixer.clipAction(this.source.animations[0]);
@@ -66,6 +64,7 @@ export default class Fox {
 
         this.animation.actions.current = this.animation.actions.idle;
         // this.animation.actions.current = this.animation.actions.walking;
+        // this.animation.actions.current = this.animation.actions.running
         this.animation.actions.current.play();
 
         this.animation.play = (name) => {

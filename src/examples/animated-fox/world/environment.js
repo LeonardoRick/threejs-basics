@@ -34,10 +34,12 @@ export default class Environment {
         this.scene.add(this.sunLight);
 
         // debug
-        this.debugFolder.add(this.sunLight, 'intensity').name('Sun Intensity').step(0.001).min(0).max(10);
-        this.debugFolder.add(this.sunLight.position, 'x').name('Sun X').step(0.001).min(-5).max(5);
-        this.debugFolder.add(this.sunLight.position, 'y').name('Sun Y').step(0.001).min(-5).max(5);
-        this.debugFolder.add(this.sunLight.position, 'z').name('Sun Z').step(0.001).min(-5).max(5);
+        if (this.debug.active) {
+            this.debugFolder.add(this.sunLight, 'intensity').name('Sun Intensity').step(0.001).min(0).max(10);
+            this.debugFolder.add(this.sunLight.position, 'x').name('Sun X').step(0.001).min(-5).max(5);
+            this.debugFolder.add(this.sunLight.position, 'y').name('Sun Y').step(0.001).min(-5).max(5);
+            this.debugFolder.add(this.sunLight.position, 'z').name('Sun Z').step(0.001).min(-5).max(5);
+        }
     }
 
     setEnvironmentMap() {
@@ -62,12 +64,14 @@ export default class Environment {
         this.environmentMap.updateMaterials();
 
         // debug
-        this.debugFolder
-            .add(this.environmentMap, 'intensity')
-            .name('envMapIntensity')
-            .step(0.001)
-            .min(0)
-            .max(10)
-            .onChange(this.environmentMap.updateMaterials);
+        if (this.debug.active) {
+            this.debugFolder
+                .add(this.environmentMap, 'intensity')
+                .name('envMapIntensity')
+                .step(0.001)
+                .min(0)
+                .max(10)
+                .onChange(this.environmentMap.updateMaterials);
+        }
     }
 }
