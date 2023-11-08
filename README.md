@@ -26,6 +26,9 @@ npm run build
 ## Create another animation
 
 1) Choose the proper file (the one that is more related to the animation goal)
+   1) or create one new file as `new-feature.js`
+      1) to see something on the screen copy `example-template.js` content to your file
+   2) choose a name for your function like `newFeatureExample`
 2) Add the function call on `methodObject` in `canvas.js`
 3) Add the route on `routes.js`
-4) Reload server so routes can be added on webpack
+4) Reload server so routes can be created on webpack

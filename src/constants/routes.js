@@ -164,6 +164,22 @@ module.exports = {
             group: ROUTE_GROUPS.rendering,
             debug: true,
         },
+
+        {
+            name: 'shaderExample',
+            displayName: 'Shader Messy Square',
+            group: ROUTE_GROUPS.shaders,
+        },
+        {
+            name: 'shaderExample2',
+            displayName: 'Shader 2',
+            group: ROUTE_GROUPS.shaders,
+        },
+        {
+            name: 'shaderMaterial',
+            displayName: 'ShaderMaterial (not RawShaderMaterial)',
+            group: ROUTE_GROUPS.shaders,
+        },
         // others
         {
             name: 'debugGUIExample',

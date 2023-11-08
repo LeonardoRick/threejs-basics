@@ -40,7 +40,7 @@ import { physicsExample } from '../examples/physics';
 import { realisticRender } from '../examples/realistic-render';
 import { animatedFoxExample } from '../examples/animated-fox';
 import { importDuckExample } from '../examples/import-models';
-
+import { shaderExample, shaderExample2, shaderMaterial } from '../examples/shaders';
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
 const methodObject = {
@@ -116,6 +116,10 @@ const methodObject = {
     realisticRender,
     animatedFoxExample,
 
+    // shaders
+    shaderExample,
+    shaderExample2,
+    shaderMaterial,
     //others
     threeDText,
     debugGUIExample,

@@ -36,6 +36,10 @@ module.exports = {
             text: 'Rendering',
             container: 'rendering',
         },
+        shaders: {
+            text: 'Shaders',
+            container: 'shaders',
+        },
         others: {
             text: 'Others',
             container: 'others',
