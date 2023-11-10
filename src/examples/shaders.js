@@ -23,8 +23,8 @@ import { loopAnimation } from './basic-animations';
 const canvasId = 'default-webgl';
 
 // https://www.shadertoy.com/browse (awesome examples)
-
 // https://www.youtube.com/channel/UC8Wzk_R1GoPkPqLo-obU_kQ (nice classes do go deep)
+// https://thebookofshaders.com/ (nice classes do go deep)
 
 // shaders is one of the main component of webGL.
 // there are 1) vertex shaders and 2) fragment shaders
