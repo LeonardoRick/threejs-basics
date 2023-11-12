@@ -180,6 +180,11 @@ module.exports = {
             displayName: 'ShaderMaterial (not RawShaderMaterial)',
             group: ROUTE_GROUPS.shaders,
         },
+        {
+            name: 'ragingSeaExample',
+            displayName: 'Raging Sea',
+            group: ROUTE_GROUPS.shaders,
+        },
         // others
         {
             name: 'debugGUIExample',

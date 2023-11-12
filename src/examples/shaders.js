@@ -18,13 +18,19 @@ import testVertexShader2 from '../shaders/shaderExample2/testVertex2.glsl';
 import testFragmentShader2 from '../shaders/shaderExample2/testFragment2.glsl';
 import shaderMaterialVertex from '../shaders/shaderMaterial/shaderMaterialVertex.glsl';
 import shaderMaterialFragment from '../shaders/shaderMaterial/shaderMaterialFragment.glsl';
+import ragingSeaVertex from '../shaders/ragingSea/vertex.glsl';
+import ragingSeaFragment from '../shaders/ragingSea/fragment.glsl';
 import { getGUI } from './debug';
 import { loopAnimation } from './basic-animations';
 const canvasId = 'default-webgl';
 
+/**
+ * LINKS
+ */
 // https://www.shadertoy.com/browse (awesome examples)
 // https://www.youtube.com/channel/UC8Wzk_R1GoPkPqLo-obU_kQ (nice classes do go deep)
 // https://thebookofshaders.com/ (nice classes do go deep)
+// https://gist.github.com/patriciogonzalezvivo/670c22f3966e662d2f83 (classic GLSL noise algorithms)
 
 // shaders is one of the main component of webGL.
 // there are 1) vertex shaders and 2) fragment shaders
@@ -160,4 +166,88 @@ export function shaderMaterial() {
 
     const camera = setupDefaultCameraAndScene(scene, renderer);
     applyOrbitControl(camera, canvas, renderer, scene);
+}
+
+export function ragingSeaExample() {
+    const gui = getGUI();
+    const debugObject = {
+        depthColor: '#186691',
+        surfaceColor: '#9bd8ff',
+    };
+    const clock = new Clock();
+    const [renderer, scene, canvas] = getRendererSceneCanvas(canvasId);
+    // use 512 as subdivisions instead of 128 to have more waves and more details
+    const waterGeometry = new PlaneGeometry(2, 2, 512, 512);
+    const material = new ShaderMaterial({
+        vertexShader: ragingSeaVertex,
+        fragmentShader: ragingSeaFragment,
+        side: 2,
+        uniforms: {
+            uTime: { value: 0 },
+            uBigWavesElevation: { value: 0.2 },
+            // since we are creating waves on x and z axis, we need to set the frequency
+            // as a vector2 so we can have different hieght for waves on each axis
+            uBigWavesFrequency: { value: new Vector2(4, 1.15) },
+            uBigWavesSpeed: { value: 0.75 },
+
+            uSmallWavesElevation: { value: 0.15 },
+            uSmallWavesFrequency: { value: 3 },
+            uSmallWavesSpeed: { value: 0.2 },
+            uSmallWavesIterations: { value: 4 },
+
+            uColorOffset: { value: 0.08 },
+            uColorMultiplier: { value: 5 },
+            uDepthColor: { value: new Color(debugObject.depthColor) },
+            uSurfaceColor: { value: new Color(debugObject.surfaceColor) },
+        },
+    });
+    const water = new Mesh(waterGeometry, material);
+    water.rotation.x = -Math.PI * 0.5;
+    scene.add(water);
+    const camera = setupDefaultCameraAndScene(scene, renderer);
+    camera.position.y = 2;
+    camera.lookAt(water.position);
+
+    // debug
+    // -- big waves
+    gui.add(material.uniforms.uBigWavesElevation, 'value').min(0).max(1).step(0.001).name('elevation');
+    gui.add(material.uniforms.uBigWavesFrequency.value, 'x').min(1).max(15).step(0.5).name('frequencyX');
+    gui.add(material.uniforms.uBigWavesFrequency.value, 'y').min(0.5).max(10).step(0.5).name('frequencyZ');
+    gui.add(material.uniforms.uBigWavesSpeed, 'value').min(0).max(4).step(0.001).name('speed');
+    //-- small waves
+    gui.add(material.uniforms.uSmallWavesElevation, 'value')
+        .min(0)
+        .max(5)
+        .step(0.001)
+        .name('Small Waves Elevation');
+    gui.add(material.uniforms.uSmallWavesFrequency, 'value')
+        .min(0)
+        .max(30)
+        .step(0.001)
+        .name('Small Waves Frequency');
+    gui.add(material.uniforms.uSmallWavesSpeed, 'value').min(0).max(4).step(0.001).name('Small Waves Speed');
+    gui.add(material.uniforms.uSmallWavesIterations, 'value')
+        .min(0)
+        .max(8)
+        .step(1)
+        .name('Small Waves Iterations');
+
+    // -- color
+    gui.add(material.uniforms.uColorOffset, 'value').min(0).max(1).step(0.001).name('colorOffset');
+    gui.add(material.uniforms.uColorMultiplier, 'value').min(0).max(10).step(0.001).name('colorMultiplier');
+
+    // this ones can't be directly gui on the material because it needs to be a instance of the color class
+    // inside the uniforms. so we need to create a debugObject and then set the value inside the uniforms
+    // inside the onChange function
+    gui.addColor(debugObject, 'depthColor').onChange(() => {
+        material.uniforms.uDepthColor.value.set(debugObject.depthColor);
+    });
+    gui.addColor(debugObject, 'surfaceColor').onChange(() => {
+        material.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor);
+    });
+    applyOrbitControl(camera, canvas, renderer, scene);
+    loopAnimation(renderer, scene, camera, () => {
+        const elapsedTime = clock.getElapsedTime();
+        material.uniforms.uTime.value = elapsedTime;
+    });
 }
