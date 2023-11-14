@@ -6,6 +6,7 @@ uniform float uColorMultiplier;
 
 varying float vElevation;
 
+
 void main() {
     // applying vElevation on the color means that when we want more color when
     // the elevation is higher, less color when the elevation is lower

@@ -1,8 +1,6 @@
 import {
     ACESFilmicToneMapping,
-    CameraHelper,
     CineonToneMapping,
-    CubeTexture,
     CubeTextureLoader,
     DirectionalLight,
     LinearToneMapping,
@@ -11,11 +9,10 @@ import {
     NoToneMapping,
     PCFShadowMap,
     ReinhardToneMapping,
-    SphereGeometry,
     sRGBEncoding,
 } from 'three';
 import { applyOrbitControl } from './cameras';
-import { getCube, getRendererSceneCanvas, getSphere, setupDefaultCameraAndScene } from '../utils';
+import { getRendererSceneCanvas, setupDefaultCameraAndScene } from '../utils';
 import { getGUI } from './debug';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 

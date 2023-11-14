@@ -34,7 +34,12 @@ import {
 import { threeDText } from '../examples/geometries/text-buffer-geometry';
 import { lightsExample } from '../examples/lights';
 import { shadowsExample, animatedShadowExample, bakedShadowExample } from '../examples/shadows';
-import { particlesExample, particlesWaveExample, galaxyGeneratorExample } from '../examples/particles';
+import {
+    particlesExample,
+    particlesWaveExample,
+    galaxyGeneratorExample,
+    galaxyGeneratorShadersExample,
+} from '../examples/particles';
 import { raycasterLineExample, raycasterMouseHoverExample } from '../examples/raycaster';
 import { physicsExample } from '../examples/physics';
 import { realisticRender } from '../examples/realistic-render';
@@ -104,6 +109,7 @@ const methodObject = {
     particlesExample,
     particlesWaveExample,
     galaxyGeneratorExample,
+    galaxyGeneratorShadersExample,
 
     // raycaster
     raycasterLineExample,
