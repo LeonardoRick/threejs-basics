@@ -168,7 +168,7 @@ export function animateModelShaderExample() {
             'void main() {',
             `
                 void main() {
-                    float angle = (position.y + uTime) * 0.2;
+                    float angle = sin(position.y + uTime) * 0.2;
 
             `
         );
