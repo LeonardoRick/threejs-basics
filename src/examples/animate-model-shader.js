@@ -137,11 +137,15 @@ export function animateModelShaderExample() {
     const customUniforms = {
         uTime: { value: 0 },
     };
-    // shader variable will have access to:
-    // uniform: variables that are the same for all the vertices
-    // vertexShader: function that will be executed for each vertex
-    // fragmentShader: function that will be executed for each fragment
-    material.onBeforeCompile = (shader) => {
+
+    /**
+     * shader variable will have access to:
+     * uniform: variables that are the same for all the vertices
+     * vertexShader: function that will be executed for each vertex
+     * fragmentShader: function that will be executed for each fragment
+     * @param {THREE.Shader} shader
+     */
+    const rotate = (shader) => {
         shader.uniforms.uTime = customUniforms.uTime;
 
         shader.vertexShader = shader.vertexShader.replace(
@@ -157,13 +161,27 @@ export function animateModelShaderExample() {
             `
         );
 
+        /**
+         * main variable declaration
+         */
+        shader.vertexShader = shader.vertexShader.replace(
+            'void main() {',
+            `
+                void main() {
+                    float angle = (position.y + uTime) * 0.2;
+
+            `
+        );
+
+        /**
+         * this part will only run for the real material, not the depth material
+         * because the normals doesn't matter for the depth material
+         */
         shader.vertexShader = shader.vertexShader.replace(
             '#include <beginnormal_vertex>',
             `
                 #include <beginnormal_vertex>
-                float angle = (position.y + uTime) * 0.2;
-                mat2 rotateMatrix = get2dRotateMatrix(angle);
-                objectNormal.xz *= rotateMatrix;
+                objectNormal.xz *= get2dRotateMatrix(angle);
             `
         );
 
@@ -171,45 +189,18 @@ export function animateModelShaderExample() {
             '#include <begin_vertex>',
             `
                 #include <begin_vertex>
-                //float angle = (position.y + uTime) * 0.2;
-                //mat2 rotateMatrix = get2dRotateMatrix(angle);
-                // rotate every vertex in the xz with this declared function get2dRotateMatrix
-                transformed.xz *= rotateMatrix;
-                objectNormal.xz *= rotateMatrix;
+                //? rotate every vertex in the xz with this
+                //? declared function get2dRotateMatrix
+                transformed.xz *= get2dRotateMatrix(angle);
             `
         );
     };
 
+    material.onBeforeCompile = rotate;
     // applying the rotation on the depth material fix the drop shadow but it doesnt' fix the core shadow.
     // it fixes the shadow that is projected by our model on other surfaces, but we will still have a problem
     // with the shadow from the model on itself. To fix that we need to update the normal of the real material
-    depthMaterial.onBeforeCompile = (shader) => {
-        shader.uniforms.uTime = customUniforms.uTime;
-
-        shader.vertexShader = shader.vertexShader.replace(
-            '#include <common>',
-            `
-                #include <common>
-
-                uniform float uTime;
-                mat2 get2dRotateMatrix(float _angle)
-                {
-                    return mat2(cos(_angle), - sin(_angle), sin(_angle), cos(_angle));
-                }
-            `
-        );
-
-        shader.vertexShader = shader.vertexShader.replace(
-            '#include <begin_vertex>',
-            `
-                #include <begin_vertex>
-                float angle = (position.y + uTime) * 0.2;
-                mat2 rotateMatrix = get2dRotateMatrix(angle);
-                // rotate every vertex in the xz with this declared function get2dRotateMatrix
-                transformed.xz *= rotateMatrix;
-            `
-        );
-    };
+    depthMaterial.onBeforeCompile = rotate;
 
     loopAnimation(renderer, scene, camera, () => {
         const elapsedTime = clock.getElapsedTime();
