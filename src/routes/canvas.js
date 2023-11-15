@@ -46,6 +46,8 @@ import { realisticRender } from '../examples/realistic-render';
 import { animatedFoxExample } from '../examples/animated-fox';
 import { importDuckExample } from '../examples/import-models';
 import { shaderExample, shaderExample2, shaderMaterial, ragingSeaExample } from '../examples/shaders';
+import { animateModelShaderExample } from '../examples/animate-model-shader';
+
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
 const methodObject = {
@@ -127,6 +129,8 @@ const methodObject = {
     shaderExample2,
     shaderMaterial,
     ragingSeaExample,
+    animateModelShaderExample,
+
     //others
     threeDText,
     debugGUIExample,

@@ -169,7 +169,7 @@ module.exports = {
             group: ROUTE_GROUPS.rendering,
             debug: true,
         },
-
+        // shaders
         {
             name: 'shaderExample',
             displayName: 'Shader Messy Square',
@@ -188,6 +188,11 @@ module.exports = {
         {
             name: 'ragingSeaExample',
             displayName: 'Raging Sea',
+            group: ROUTE_GROUPS.shaders,
+        },
+        {
+            name: 'animateModelShaderExample',
+            displayName: 'Animate Model Shader',
             group: ROUTE_GROUPS.shaders,
         },
         // others
