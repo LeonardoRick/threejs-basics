@@ -157,6 +157,11 @@ module.exports = {
             displayName: 'Duck',
             group: ROUTE_GROUPS.models,
         },
+        {
+            name: 'postProcessingExample',
+            displayName: 'Post Processing',
+            group: ROUTE_GROUPS.models,
+        },
         //rendering
         {
             name: 'realisticRender',

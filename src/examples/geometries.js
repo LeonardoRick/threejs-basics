@@ -1,6 +1,6 @@
-import { BufferAttribute, BufferGeometry, Mesh, MeshBasicMaterial, PerspectiveCamera } from 'three';
+import { BufferAttribute, BufferGeometry, Mesh, MeshBasicMaterial } from 'three';
 import { applyOrbitControl } from './cameras';
-import { getRendererSceneCanvas, setResizeListener, setupDefaultCameraAndScene } from '../utils';
+import { getRendererSceneCanvas, setupDefaultCameraAndScene } from '../utils';
 
 const canvasId = 'default-webgl';
 
@@ -28,7 +28,7 @@ function createCustomGeometry(
     // each 3 indexes are a vertex (x, y z)
     const positionsArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0]);
     const mesh = getCustomMesh(positionsArray);
-    const camera = setupDefaultCameraAndScene(scene, renderer, mesh, width, height, resize);
+    const camera = setupDefaultCameraAndScene(scene, renderer, { mesh, width, height, resize });
 
     return [renderer, scene, mesh, camera];
 }
@@ -50,7 +50,7 @@ function createRandomObject(
         positionsArray[i] = (Math.random() - 0.5) * count;
     }
     const mesh = getCustomMesh(positionsArray);
-    const camera = setupDefaultCameraAndScene(scene, renderer, mesh, width, height, resize);
+    const camera = setupDefaultCameraAndScene(scene, renderer, { mesh, width, height, resize });
     camera.position.z = 140;
 
     return [renderer, scene, mesh, camera];

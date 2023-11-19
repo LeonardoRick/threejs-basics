@@ -47,6 +47,7 @@ import { animatedFoxExample } from '../examples/animated-fox';
 import { importDuckExample } from '../examples/import-models';
 import { shaderExample, shaderExample2, shaderMaterial, ragingSeaExample } from '../examples/shaders';
 import { animateModelShaderExample } from '../examples/animate-model-shader';
+import { postProcessingExample } from '../examples/post-processing';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
@@ -119,6 +120,7 @@ const methodObject = {
 
     // models
     importDuckExample,
+    postProcessingExample,
 
     // rendering
     realisticRender,

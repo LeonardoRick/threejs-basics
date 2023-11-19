@@ -46,7 +46,7 @@ export function threeDText() {
         textGeometry.center();
         // to center, instead of moving the Mesh, we are going to move the whole geometry with translate. which moves every vertice
         const text = new Mesh(textGeometry, material);
-        const camera = setupDefaultCameraAndScene(scene, renderer, text);
+        const camera = setupDefaultCameraAndScene(scene, renderer, { mesh: text });
 
         // adding multiple donuts on the screen. Leave the geometry outside of the for loop to optimize it
         const torusGeometry = new TorusGeometry(0.3, 0.2, 20, 45);

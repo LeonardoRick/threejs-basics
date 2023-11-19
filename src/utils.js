@@ -22,7 +22,7 @@ export function getCubeSetup(
     });
 
     const mesh = getCube(material);
-    const camera = setupDefaultCameraAndScene(scene, renderer, mesh, width, height, resize);
+    const camera = setupDefaultCameraAndScene(scene, renderer, { mesh, width, height, resize });
     return [renderer, scene, mesh, camera, material];
 }
 
@@ -49,7 +49,7 @@ export function getRendererSceneCanvas(
     return [renderer, scene, canvas];
 }
 
-export function setResizeListener(camera, renderer) {
+export function setResizeListener(camera, renderer, composer = undefined) {
     window.addEventListener('resize', () => {
         // Update camera
         camera.aspect = window.innerWidth / window.innerHeight;
@@ -58,6 +58,10 @@ export function setResizeListener(camera, renderer) {
 
         // Update renderer
         updateRendererSizeRatio(renderer, window.innerWidth, window.innerHeight);
+        // if we have an effect composers we should udpate its size as well
+        if (composer) {
+            updateRendererSizeRatio(composer, window.innerWidth, window.innerHeight);
+        }
     });
 }
 
@@ -82,11 +86,7 @@ export function updateRendererSizeRatio(renderer, width, height) {
 export function setupDefaultCameraAndScene(
     scene,
     renderer,
-    mesh = null,
-    width = window.innerWidth,
-    height = window.innerHeight,
-    resize = true,
-    camera = null
+    { mesh = null, resize = true, width = window.innerWidth, height = window.innerHeight, camera = null } = {}
 ) {
     const _camera = camera || new PerspectiveCamera(75, width / height);
     _camera.position.z = 3;
@@ -99,3 +99,7 @@ export function setupDefaultCameraAndScene(
     resize && setResizeListener(_camera, renderer);
     return _camera;
 }
+
+// used to format template literals on glsl and show a
+// formatted string by the extension glsl-literal
+export const glsl = (x) => x[0];

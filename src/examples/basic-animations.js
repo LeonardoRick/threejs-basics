@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { BoxGeometry, Clock, Group, Mesh, MeshBasicMaterial } from 'three';
 import { getCube, getCubeSetup, getRendererSceneCanvas, setupDefaultCameraAndScene } from '../utils';
 import { applyOrbitControl } from './cameras';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 
 const canvasId = 'default-webgl';
 
@@ -144,6 +145,22 @@ export function loopAnimation(renderer, scene, camera, callback = () => {}) {
     const animate = () => {
         callback();
         renderer.render(scene, camera);
+        window.requestAnimationFrame(animate);
+    };
+    animate();
+}
+
+/**
+ * Same as loopAnimation but using a effectComposer
+ * @param {EffectComposer} effectComposer
+ * @param {import('three').Scene} scene
+ * @param {import('three').Camera} camera
+ * @param {() => void} callback
+ */
+export function loopAnimationEffectComposer(effectComposer, scene, camera, callback = () => {}) {
+    const animate = () => {
+        callback();
+        effectComposer.render();
         window.requestAnimationFrame(animate);
     };
     animate();

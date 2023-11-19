@@ -1,7 +1,8 @@
 import { OrthographicCamera, PerspectiveCamera } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { animateExternalMeshWithClock, loopAnimation } from './basic-animations';
+import { animateExternalMeshWithClock, loopAnimation, loopAnimationEffectComposer } from './basic-animations';
 import { getCubeSetup, setResizeListener } from '../utils';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
 
 const canvasId = 'default-webgl';
 export function perspectiveCameraExample() {
@@ -79,5 +80,22 @@ export function applyOrbitControl(camera, canvas, renderer, scene) {
     // controls.update is required inside animation frame
     //if controls.enableDamping or controls.autoRotate are set to true
     loopAnimation(renderer, scene, camera, () => controls.update());
+    return controls;
+}
+
+/**
+ *
+ * @param {import('three').Camera} camera
+ * @param {HTMLCanvasElement} canvas
+ * @param {EffectComposer} effectComposer
+ * @param {import('three').Scene} scene
+ */
+export function applyOrbitControlOnEffectComposer(camera, canvas, effectComposer, scene) {
+    const controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.update();
+    // controls.update is required inside animation frame
+    //if controls.enableDamping or controls.autoRotate are set to true
+    loopAnimationEffectComposer(effectComposer, scene, camera, () => controls.update());
     return controls;
 }
