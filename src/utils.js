@@ -16,7 +16,7 @@ export function getCubeSetup(
     allowFullScreen = true,
     texture = null
 ) {
-    const [renderer, scene] = getRendererSceneCanvas(canvasId, width, height, allowFullScreen);
+    const [renderer, scene] = getRendererSceneCanvas(canvasId, { width, height, allowFullScreen });
     const material = new MeshBasicMaterial({
         ...(texture ? { map: texture } : { color: 0xff0000 }),
     });
@@ -35,14 +35,23 @@ export function getSphere(material) {
 
 export function getRendererSceneCanvas(
     canvasId,
-    width = window.innerWidth,
-    height = window.innerHeight,
-    allowFullScreen = true,
-    // affects performance but gives a better rendering
-    antialias = false
+    {
+        width = window.innerWidth,
+        height = window.innerHeight,
+        allowFullScreen = true,
+
+        /**
+         * affects performance but gives a better rendering
+         */
+        antialias = false,
+        /**
+         * Can be "high-performance", "low-power" or "default"
+         */
+        powerPreference = 'default',
+    } = {}
 ) {
     const canvas = document.getElementById(canvasId);
-    const renderer = new WebGLRenderer({ canvas, antialias });
+    const renderer = new WebGLRenderer({ canvas, antialias, powerPreference });
     const scene = new Scene();
     updateRendererSizeRatio(renderer, width, height);
     allowFullScreen && setFullScreenListener(canvas);

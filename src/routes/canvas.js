@@ -48,6 +48,7 @@ import { importDuckExample } from '../examples/import-models';
 import { shaderExample, shaderExample2, shaderMaterial, ragingSeaExample } from '../examples/shaders';
 import { animateModelShaderExample } from '../examples/animate-model-shader';
 import { postProcessingExample } from '../examples/post-processing';
+import { performanceExample } from '../examples/performance';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
@@ -137,6 +138,7 @@ const methodObject = {
     threeDText,
     debugGUIExample,
     physicsExample,
+    performanceExample,
 };
 
 // check if route exists and is not the index route

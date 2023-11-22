@@ -40,13 +40,7 @@ export function postProcessingExample() {
     const gui = getGUI();
     gui.close();
     const debugObject = {};
-    const [renderer, scene, canvas] = getRendererSceneCanvas(
-        canvasId,
-        window.innerWidth,
-        window.innerHeight,
-        true,
-        true
-    );
+    const [renderer, scene, canvas] = getRendererSceneCanvas(canvasId, { antialias: true });
     // resize false to resize later when we have access to the effect composer
     const camera = setupDefaultCameraAndScene(scene, renderer, { resize: false });
     camera.position.set(6, 0, -4);

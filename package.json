@@ -3,32 +3,38 @@
     "license": "UNLICENSED",
     "scripts": {
         "build": "webpack --config ./bundler/webpack.prod.js",
-        "dev": "webpack serve --config ./bundler/webpack.dev.js"
+        "dev": "webpack serve --config ./bundler/webpack.dev.js",
+        "dev-vite": "VITE_CJS_IGNORE_WARNING=true vite dev --config vite.config.js"
     },
     "dependencies": {
         "@babel/core": "^7.17.10",
         "@babel/preset-env": "^7.17.10",
         "babel-loader": "^8.2.5",
         "cannon-es": "^0.20.0",
-        "clean-webpack-plugin": "^4.0.0",
-        "copy-webpack-plugin": "^10.2.4",
-        "css-loader": "^6.7.1",
-        "file-loader": "^6.2.0",
         "gsap": "^3.11.3",
-        "html-loader": "^3.1.0",
-        "html-webpack-plugin": "^5.5.0",
         "lil-gui": "^0.17.0",
-        "mini-css-extract-plugin": "^2.6.0",
         "portfinder-sync": "0.0.2",
-        "raw-loader": "^4.0.2",
-        "style-loader": "^3.3.1",
-        "three": "^0.140.0",
-        "webpack": "^5.72.0",
-        "webpack-cli": "^4.9.2",
-        "webpack-dev-server": "^4.8.1",
-        "webpack-merge": "^5.8.0"
+        "stats.js": "^0.17.0",
+        "three": "^0.158.0",
+        "vite-plugin-commonjs": "^0.10.1"
     },
     "devDependencies": {
-        "webpack-glsl-loader": "^1.0.1"
+        "clean-webpack-plugin": "^4.0.0",
+        "copy-webpack-plugin": "^10.2.4",
+        "css-loader": "^6.8.1",
+        "file-loader": "^6.2.0",
+        "html-loader": "^3.1.2",
+        "html-webpack-plugin": "^5.5.3",
+        "mini-css-extract-plugin": "^2.7.6",
+        "raw-loader": "^4.0.2",
+        "style-loader": "^3.3.3",
+        "vite": "^5.0.0",
+        "vite-plugin-glsl": "^1.1.2",
+        "vite-plugin-html": "^3.2.0",
+        "webpack": "^5.89.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.15.1",
+        "webpack-glsl-loader": "^1.0.1",
+        "webpack-merge": "^5.10.0"
     }
 }

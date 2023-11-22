@@ -1,4 +1,5 @@
 const { ROUTE_GROUPS } = require('./route-groups');
+
 module.exports = {
     ROUTES: [
         // basicAnimations
@@ -208,5 +209,6 @@ module.exports = {
         },
         { name: 'threeDText', displayName: '3D Text', group: ROUTE_GROUPS.others },
         { name: 'physicsExample', displayName: 'Physics', group: ROUTE_GROUPS.others },
+        { name: 'performanceExample', displayName: 'Perfomance Boost', group: ROUTE_GROUPS.others },
     ],
 };

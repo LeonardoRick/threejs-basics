@@ -31,13 +31,7 @@ export function animateModelShaderExample() {
     const clock = new Clock();
     gui.close();
     const debugObject = {};
-    const [renderer, scene, canvas] = getRendererSceneCanvas(
-        canvasId,
-        window.innerWidth,
-        window.innerHeight,
-        true,
-        true
-    );
+    const [renderer, scene, canvas] = getRendererSceneCanvas(canvasId, { antialias: true });
     const camera = setupDefaultCameraAndScene(scene, renderer);
     applyOrbitControl(camera, canvas, renderer, scene);
 

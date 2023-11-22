@@ -32,3 +32,7 @@ npm run build
 2) Add the function call on `methodObject` in `canvas.js`
 3) Add the route on `routes.js`
 4) Reload server so routes can be created on webpack
+
+
+### Next steps:
+- https://discoverthreejs.com/

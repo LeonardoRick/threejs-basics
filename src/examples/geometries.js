@@ -23,7 +23,7 @@ function createCustomGeometry(
     resize = true,
     allowFullScreen = true
 ) {
-    const [renderer, scene] = getRendererSceneCanvas(canvasId, width, height, allowFullScreen);
+    const [renderer, scene] = getRendererSceneCanvas(canvasId, { width, height, allowFullScreen });
 
     // each 3 indexes are a vertex (x, y z)
     const positionsArray = new Float32Array([0, 0, 0, 0, 1, 0, 1, 0, 0]);
@@ -40,7 +40,7 @@ function createRandomObject(
     resize = true,
     allowFullScreen = true
 ) {
-    const [renderer, scene] = getRendererSceneCanvas(canvasId, width, height, allowFullScreen);
+    const [renderer, scene] = getRendererSceneCanvas(canvasId, { width, height, allowFullScreen });
 
     const count = 100;
     // each 3 indexes are a single vertex (x, y z) of a 'triangle' (3 vertexes, so 3 *3)
