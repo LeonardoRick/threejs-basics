@@ -179,7 +179,7 @@ export function performanceExample() {
     /**
      * Use the right material:
      * Some materials like MeshStandardMaterial or MeshPhysicalMaterial need more resources than materials
-     * such as MeshBasicMaterial, MeshLambertMaterial or MeshPhongMaterial.
+     * such as MeshBasicMaterial, MeshLambertMaterial or MeshPhongMaterial. (MeshBasicMaterial is the cheapest one)
      */
 
     applyOrbitControl(camera, canvas, renderer, scene);

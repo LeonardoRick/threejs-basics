@@ -4,3 +4,17 @@
     left: 0;
     outline: none;
 }
+
+.loading-bar {
+    display: none;
+    position: absolute;
+    top: 50%;
+    width: 99%;
+    height: 2px;
+    background-color: white;
+    transform: scaleX(0);
+    transform-origin: top left;
+    transition: transform 0.5s;
+    /* improve performances */
+    will-change: transform;
+}

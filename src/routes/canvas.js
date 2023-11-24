@@ -42,7 +42,7 @@ import {
 } from '../examples/particles';
 import { raycasterLineExample, raycasterMouseHoverExample } from '../examples/raycaster';
 import { physicsExample } from '../examples/physics';
-import { realisticRender } from '../examples/realistic-render';
+import { realisticRender, realisticRenderLoading } from '../examples/realistic-render';
 import { animatedFoxExample } from '../examples/animated-fox';
 import { importDuckExample } from '../examples/import-models';
 import { shaderExample, shaderExample2, shaderMaterial, ragingSeaExample } from '../examples/shaders';
@@ -126,6 +126,7 @@ const methodObject = {
     // rendering
     realisticRender,
     animatedFoxExample,
+    realisticRenderLoading,
 
     // shaders
     shaderExample,

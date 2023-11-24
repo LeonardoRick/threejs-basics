@@ -175,6 +175,11 @@ module.exports = {
             group: ROUTE_GROUPS.rendering,
             debug: true,
         },
+        {
+            name: 'realisticRenderLoading',
+            displayName: 'Realistic Render Loading',
+            group: ROUTE_GROUPS.rendering,
+        },
         // shaders
         {
             name: 'shaderExample',
