@@ -34,7 +34,7 @@ module.exports = {
                 new HtmlWebpackPlugin({
                     inject: true,
                     favicon: path.resolve(__dirname, '../static/images/favicon.ico'),
-                    template: path.resolve(__dirname, `../src/routes/canvas.html`),
+                    template: path.resolve(__dirname, `../src/routes/${route.html || 'canvas'}.html`),
                     filename: `${route.name}.html`,
                     chunks: [route.name],
                 })

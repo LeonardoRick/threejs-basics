@@ -163,6 +163,12 @@ module.exports = {
             displayName: 'Post Processing',
             group: ROUTE_GROUPS.models,
         },
+        {
+            name: 'mixWebGLAndHTMLExample',
+            displayName: 'Mix WebGL and HTML',
+            group: ROUTE_GROUPS.models,
+            html: 'mixWebGLAndHTMLExample',
+        },
         //rendering
         {
             name: 'realisticRender',
@@ -177,7 +183,7 @@ module.exports = {
         },
         {
             name: 'realisticRenderLoading',
-            displayName: 'Realistic Render Loading',
+            displayName: 'Realistic Render Loading Animation',
             group: ROUTE_GROUPS.rendering,
         },
         // shaders

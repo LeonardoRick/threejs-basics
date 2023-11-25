@@ -132,8 +132,11 @@ export function postProcessingExample() {
     effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     effectComposer.setSize(window.innerWidth, window.innerHeight);
 
-    // a pass is like a step of post processing, where we can do whatever we want with the scene
-    // to improve it or change it a little bit, add efects etc.
+    /**
+     * Passes
+     * a pass is like a step of post processing, where we can do whatever we
+     *  want with the scene to improve it or change it a little bit, add efects etc.
+     */
     const renderPass = new RenderPass(scene, camera);
 
     const dotScreenPass = new DotScreenPass();
@@ -234,7 +237,7 @@ export function postProcessingExample() {
     gui.add(displacementPass, 'enabled').name('Displacement Pass');
 
     const gammaCorrectionPass = new ShaderPass(GammaCorrectionShader);
-    const smaaPass = new SMAAPass();
+    const smaaPass = new SMAAPass(); // this pass is for antialiasing
 
     effectComposer.addPass(renderPass);
     effectComposer.addPass(dotScreenPass);
