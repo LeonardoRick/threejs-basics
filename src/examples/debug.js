@@ -28,6 +28,12 @@ export function setGUI(width = 400) {
     }
 }
 
+/**
+ * returns the gui instance. If its not defined, it will be created.
+ * obs: never call this function on root, if not, all the examples will have a gui.
+ * call it inside the example function
+ * @returns {GUI} gui
+ */
 export function getGUI() {
     setGUI();
     return gui;

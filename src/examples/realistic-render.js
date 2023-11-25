@@ -92,6 +92,7 @@ export function realisticRender() {
     const updateAllMaterials = () => {
         // it recursively goes through all the children of the scene so we can apply the envMap to all the materials
         scene.traverse((child) => {
+            // if (child.isMesh && child.material.isMeshStandardMaterial) { // alternative way (showed in newer videos)
             if (child instanceof Mesh && child.material instanceof MeshStandardMaterial) {
                 // this next line do the same thing as scene.environment = environmentMap;
                 // child.material.envMap = environmentMap;
@@ -237,6 +238,7 @@ export function realisticRenderLoading() {
     const updateAllMaterials = () => {
         // it recursively goes through all the children of the scene so we can apply the envMap to all the materials
         scene.traverse((child) => {
+            // if (child.isMesh && child.material.isMeshStandardMaterial) { // alternative way (showed in newer videos)
             if (child instanceof Mesh && child.material instanceof MeshStandardMaterial) {
                 // this next line do the same thing as scene.environment = environmentMap;
                 // child.material.envMap = environmentMap;

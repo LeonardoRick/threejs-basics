@@ -6,6 +6,8 @@ import {
     BoxGeometry,
     MeshBasicMaterial,
     SphereGeometry,
+    TorusGeometry,
+    TorusKnotGeometry,
 } from 'three';
 
 export function getCubeSetup(
@@ -29,8 +31,17 @@ export function getCubeSetup(
 export function getCube(material) {
     return new Mesh(new BoxGeometry(1, 1, 1), material);
 }
+
 export function getSphere(material) {
     return new Mesh(new SphereGeometry(1, 32, 32), material);
+}
+
+export function getTorus(material) {
+    return new Mesh(new TorusGeometry(1, 0.5, 16, 100), material);
+}
+
+export function getTorusKnot(material) {
+    return new Mesh(new TorusKnotGeometry(1, 0.4, 100, 16), material);
 }
 
 export function getRendererSceneCanvas(
@@ -95,9 +106,17 @@ export function updateRendererSizeRatio(renderer, width, height) {
 export function setupDefaultCameraAndScene(
     scene,
     renderer,
-    { mesh = null, resize = true, width = window.innerWidth, height = window.innerHeight, camera = null } = {}
+    {
+        mesh = null,
+        resize = true,
+        width = window.innerWidth,
+        height = window.innerHeight,
+        camera = null,
+        near = 0.1,
+        far = 2000,
+    } = {}
 ) {
-    const _camera = camera || new PerspectiveCamera(75, width / height);
+    const _camera = camera || new PerspectiveCamera(75, width / height, near, far);
     _camera.position.z = 3;
     if (mesh) {
         _camera.lookAt(mesh.position);

@@ -50,6 +50,7 @@ import { animateModelShaderExample } from '../examples/animate-model-shader';
 import { postProcessingExample } from '../examples/post-processing';
 import { performanceExample } from '../examples/performance';
 import { mixWebGLAndHTMLExample } from '../examples/mix-webgl-html';
+import { advancedEnvironmentMapExample } from '../examples/advanced-environment-map';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
 
@@ -129,6 +130,7 @@ const methodObject = {
     realisticRender,
     animatedFoxExample,
     realisticRenderLoading,
+    advancedEnvironmentMapExample,
 
     // shaders
     shaderExample,

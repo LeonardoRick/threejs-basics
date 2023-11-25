@@ -186,6 +186,11 @@ module.exports = {
             displayName: 'Realistic Render Loading Animation',
             group: ROUTE_GROUPS.rendering,
         },
+        {
+            name: 'advancedEnvironmentMapExample',
+            displayName: 'Advanced Environment Map',
+            group: ROUTE_GROUPS.rendering,
+        },
         // shaders
         {
             name: 'shaderExample',

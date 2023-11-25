@@ -112,10 +112,12 @@ export function animateModelShaderExample() {
     debugObject.envMapIntensity = 1;
 
     // instead of adding reflection on each mesh, we can add it to the scene and then it will be applied to all meshes.
-    // we do that by using the .envMap property of the material and we need to traverse the object to update each material
+    // we do that by using the .envMap property of the material and we need to traverse the object to update each material.
+    // here we can also change the intensity of the reflection
     const updateAllMaterials = () => {
         // it recursively goes through all the children of the scene so we can apply the envMap to all the materials
         scene.traverse((child) => {
+            // if (child.isMesh && child.material.isMeshStandardMaterial) { // alternative way (showed in newer videos)
             if (child instanceof Mesh && child.material instanceof MeshStandardMaterial) {
                 // this next line do the same thing as scene.environment = environmentMap;
                 // child.material.envMap = environmentMap;
