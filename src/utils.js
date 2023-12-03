@@ -95,6 +95,12 @@ export function setFullScreenListener(canvas) {
     });
 }
 
+/**
+ *
+ * @param {import('three').Renderer} renderer
+ * @param {number} width
+ * @param {number} height
+ */
 export function updateRendererSizeRatio(renderer, width, height) {
     renderer.setSize(width, height);
     // some devices can have a pixelRatio of 5 and this costs too mutch to render because this means that each

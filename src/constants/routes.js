@@ -169,6 +169,11 @@ module.exports = {
             group: ROUTE_GROUPS.models,
             html: 'mixWebGLAndHTMLExample',
         },
+        {
+            name: 'portalSceneExample',
+            displayName: 'Portal Scene',
+            group: ROUTE_GROUPS.models,
+        },
         //rendering
         {
             name: 'realisticRender',

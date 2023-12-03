@@ -82,7 +82,7 @@ export function realisticRender() {
         '/textures/environmentMaps/0/pz.jpg',
         '/textures/environmentMaps/0/nz.jpg',
     ]);
-    environmentMap.encoding = sRGBEncoding;
+    environmentMap.encoding = sRGBEncoding; // apparently replaced by environmentMap.colorSpace = SRGBColorSpace;
     scene.background = environmentMap;
     scene.environment = environmentMap;
     debugObject.envMapIntensity = 2.5;

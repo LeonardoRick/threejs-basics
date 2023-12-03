@@ -45,7 +45,7 @@ export default class Environment {
     setEnvironmentMap() {
         // environmentMapTexture is the name we gave to this item on resources.js
         this.environmentMap.texture = this.resources.items.environmentMapTexture;
-        this.environmentMap.texture.encoding = sRGBEncoding;
+        this.environmentMap.texture.encoding = sRGBEncoding; // apparently replaced by environmentMap.colorSpace = SRGBColorSpace;
 
         this.scene.environment = this.environmentMap.texture;
 

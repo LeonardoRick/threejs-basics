@@ -43,7 +43,7 @@ export default class Floor {
     }
 
     setTextureProperties(texture) {
-        texture.encoding = sRGBEncoding;
+        texture.encoding = sRGBEncoding; // apparently replaced by environmentMap.colorSpace = SRGBColorSpace;
         texture.repeat.set(1.5, 1.5);
         texture.wrapS = RepeatWrapping;
         texture.wrapT = RepeatWrapping;

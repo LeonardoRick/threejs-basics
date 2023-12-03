@@ -50,6 +50,7 @@ import { animateModelShaderExample } from '../examples/animate-model-shader';
 import { postProcessingExample } from '../examples/post-processing';
 import { performanceExample } from '../examples/performance';
 import { mixWebGLAndHTMLExample } from '../examples/mix-webgl-html';
+import { portalSceneExample } from '../examples/portal-scene';
 import { advancedEnvironmentMapExample } from '../examples/advanced-environment-map';
 
 const currentRoute = window.location.pathname.replace('/', '').replace('.html', '');
@@ -125,6 +126,7 @@ const methodObject = {
     importDuckExample,
     postProcessingExample,
     mixWebGLAndHTMLExample,
+    portalSceneExample,
 
     // rendering
     realisticRender,

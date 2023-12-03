@@ -72,14 +72,18 @@ export function orbitControlsExample() {
  * @param {HTMLCanvasElement} canvas
  * @param {import('three').Renderer} renderer
  * @param {import('three').Scene} scene
+ * @param {Function} animationCallback
  */
-export function applyOrbitControl(camera, canvas, renderer, scene) {
+export function applyOrbitControl(camera, canvas, renderer, scene, animationCallback = () => {}) {
     const controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
     controls.update();
     // controls.update is required inside animation frame
     //if controls.enableDamping or controls.autoRotate are set to true
-    loopAnimation(renderer, scene, camera, () => controls.update());
+    loopAnimation(renderer, scene, camera, () => {
+        controls.update();
+        animationCallback();
+    });
     return controls;
 }
 
